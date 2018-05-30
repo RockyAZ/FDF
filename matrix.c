@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azaporoz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/27 18:05:49 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/03/30 14:02:28 by azaporoz         ###   ########.fr       */
+/*   Created: 2018/05/29 12:42:31 by azaporoz          #+#    #+#             */
+/*   Updated: 2018/05/29 12:42:32 by azaporoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "fdf.h"
 
-void	*ft_memalloc(size_t size)
+void	matrix_scaling_plus(t_win *win, t_matrix *matrix)
 {
-	void *mem;
+	matrix->a += 1;
+	matrix->e += 1;
+	matrix->i += 1;
+	matrix->s += 1;
 
-	mem = malloc(size);
-	if (mem == NULL)
-		return (NULL);
-	else
-		return (ft_memset(mem, 0, size));
+
+}
+
+void	matrix(t_win *win)
+{
+	t_matrix *mx;
+
+	mx = (t_matrix*)malloc(sizeof(t_matrix));
+	if ()
+
 }

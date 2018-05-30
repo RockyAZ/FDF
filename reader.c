@@ -24,6 +24,9 @@ int count_chars(t_win *win, char *line)
         free(arr[x]);
         x++;
     }
+/*
+** VALIDATOR
+*/
     if (win->chars == 0)
         win->chars = x;
     else
@@ -38,13 +41,13 @@ int count_line(t_win *win)
     char *line;
 
     win->chars = 0;
-    win->line = 0;
+    win->lines = 0;
     win->fd = open(win->name, O_RDONLY);
     while (get_next_line(win->fd, &line) > 0)
     {
         if (!(count_chars(win, line)))
             return (0);
-        win->line++;
+        win->lines++;
         free(line);
     }
     close(win->fd);
@@ -59,10 +62,12 @@ int reader(t_win *win)
     int i;
     int j;
 
+	if ((win->fd = open(win->name, O_RDONLY)) < 0)
+		return (write(1, "error_open\n", 11));
     if (!(count_line(win)))
-        return (0);
-        i = 0;
-    win->map_coord = (int**)ft_memalloc(sizeof(int*) * win->line);
+        return (-1);
+    i = 0;
+    win->map_coord = (int**)ft_memalloc(sizeof(int*) * win->lines);
     while (get_next_line(win->fd, &line))
     {
         arr = ft_strsplit(line, ' ');
@@ -73,6 +78,7 @@ int reader(t_win *win)
             win->map_coord[i][j] = ft_atoi(arr[j]);
             j++;
         }
+        free(line);
         i++;
     }
     return (1);
