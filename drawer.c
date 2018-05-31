@@ -12,22 +12,26 @@
 
 #include "fdf.h"
 
-void ft_line_draw(t_win *win, int x0, int y0, int x1, int y1, int color)
+void ft_line_draw(t_win *win, double x0, double y0, double x1, double y1, int color)
 {
 	int i;
-	int dx = ft_abs(x1-x0);
-	int dy = ft_abs(y1-y0);
-	int sx = x0 < x1 ? 1 : -1;
-	int sy = y0 < y1 ? 1 : -1;
-	int err = (dx > dy ? dx : -dy);//поделить на 2?->    ) / 2;
-	int cp_err;
+	double dx = fabs(x1 - x0);
+	double dy = fabs(y1 - y0);
+	double sx = x0 < x1 ? 1 : -1;
+	double sy = y0 < y1 ? 1 : -1;
+	double err = (dx > dy ? dx : -dy);//поделить на 2?->    ) / 2;
+	double cp_err;
 
 	while (x0 <= x1 && y0 <= y1)
 	{
 	i = (x0 * 4) + (y0 * win->size_line);
-		win->ptr[i] = 255;
-		win->ptr[++i] = 255;
+//		win->ptr[i] = 255;
+//		win->ptr[++i] = 255;
+//		win->ptr[++i] = 0;
+		win->ptr[i] = 100;
 		win->ptr[++i] = 0;
+		win->ptr[++i] = 0;
+
 		cp_err = err;
 		if (cp_err > -dx)
 		{
@@ -56,15 +60,13 @@ void ft_start(t_win *win)
 		win->check++;
 }
 
-void    drawer(t_win *win)
+void    draw_image(t_win *win)
 {
 	int x;
 	int y;
 
-//	win->check = 0;
-		win->x1 = win->x0;
-		win->y1 = win->y0;
-//	ft_start(win);
+	win->x1 = win->x0;
+	win->y1 = win->y0;
 	while (++y <= win->lines)
 	{
 		x = 0;
@@ -80,4 +82,11 @@ void    drawer(t_win *win)
 		win->y1 += LENGTH;
 	}
 
+}
+
+void	prepare_draw(t_win *win)
+{
+	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
+	win->ptr = mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
+	draw_image(win);
 }

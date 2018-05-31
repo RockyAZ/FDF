@@ -12,8 +12,8 @@
 
 #ifndef FDF_H
 # define FDF_H
-# define WIDTH 1500
-# define HEIGHT 1000
+# define WIDTH 1800
+# define HEIGHT 1200
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -32,13 +32,26 @@
 # define KEY_PLUS 69
 # define KEY_MINUS 78
 
+# define MOVE_UP -100
+# define MOVE_DOWN 100
+# define MOVE_LEFT -100
+# define MOVE_RIGHT 100
+
 # define LENGTH 10
 
-# include "../libft/includes/libft.h"
+# include "../../fdf/libft/includes/libft.h"
 # include <mlx.h>
-# include <math.h>
+# include <math.h>//#define M_PI == 3.14
 # include <fcntl.h>
 #include <stdio.h>
+
+typedef struct	s_coord
+{
+	double 		x;
+	double 		y;
+	double 		z;
+}				t_coord;
+
 typedef struct s_win
 {
     void       *mlx_ptr;
@@ -47,17 +60,12 @@ typedef struct s_win
     int        bpp;
     int        size_line;
     int        endian;
-    unsigned char       *ptr;
+    char       *ptr;
     void       *xpm;
 
-    char       *name;
-    int        x0;
-    int        y0;
-    int        x1;
-    int        y1;
+    char		*name;
 	int			img_x;
 	int			img_y;	
-    int        z;
     int        wx;
     int        hy;
     int        fd;
@@ -71,22 +79,22 @@ typedef struct s_win
 
 typedef struct s_matrix
 {
-    double			a;
-    double			b;
-    double			c;
-    double			p;
-    double			d;
-    double			e;
-    double			f;
-    double			q;
-    double			g;
-    double			h;
-    double			i;
-    double			r;
-    double			l;
-    double			m;
-    double			n;
-    double			s;
+    double			a1;
+    double			a2;
+    double			a3;
+    double			a4;
+    double			b1;
+    double			b2;
+    double			b3;
+    double			b4;
+    double			c1;
+    double			c2;
+    double			c3;
+    double			c4;
+    double			d1;
+    double			d2;
+    double			d3;
+    double			d4;
 }				t_matrix;
 /*
 typedef struct s_image
@@ -98,6 +106,12 @@ typedef struct s_image
 */
 
 int				reader(t_win *win);
-void			drawer(t_win *win);
-void            clean_img(t_win *win);
+void			draw_image(t_win *win);
+void			clean_img(t_win *win);
+void			error_malloc(void);
+
+
+int				what_key(int key, t_win *win);
+t_matrix		*motion_use(t_win *win, double x, double y, double z);
+
 #endif

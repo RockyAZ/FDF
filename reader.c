@@ -24,9 +24,6 @@ int count_chars(t_win *win, char *line)
         free(arr[x]);
         x++;
     }
-/*
-** VALIDATOR
-*/
     if (win->chars == 0)
         win->chars = x;
     else
