@@ -24,6 +24,9 @@
 ** хуй пойми как...
 **
 ** рекурсивно записывать координаты для прибавки производительности???
+**
+**
+** itoabase для манипуляции с цветами
 */
 int main(int ac, char **av)
 {
@@ -44,7 +47,7 @@ int main(int ac, char **av)
 	win->mlx_ptr = mlx_init();
 	win->win_ptr = mlx_new_window(win->mlx_ptr, WIDTH, HEIGHT, win->name);
 
-	mlx_key_hook(win->win_ptr, &what_key, (void*)win);
+	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
 	mlx_loop(win->mlx_ptr);
 	return (1);
 }
