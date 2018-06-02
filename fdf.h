@@ -44,12 +44,14 @@
 # include <math.h>//#define M_PI == 3.14
 # include <fcntl.h>
 #include <stdio.h>
-
+#define	EXIT_SUCCESS	0
 typedef struct	s_coord
 {
 	double 		x;
 	double 		y;
 	double 		z;
+    double		a;
+	double		color;
 }				t_coord;
 
 typedef struct s_win
@@ -62,7 +64,6 @@ typedef struct s_win
     int        endian;
     char       *ptr;
     void       *xpm;
-
     char		*name;
 	int			img_x;
 	int			img_y;	
@@ -113,5 +114,8 @@ void			error_malloc(void);
 
 int				what_key(int key, t_win *win);
 t_matrix		*motion_use(t_win *win, double x, double y, double z);
+
+int	windows_prepare(t_win *win);
+
 
 #endif
