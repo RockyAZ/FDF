@@ -12,12 +12,12 @@
 
 #include "fdf.h"
 
-t_matrix	*motion_use(t_win *win, double x, double y, double z)
+t_matrix	*move_use(t_win *win, double x, double y, double z)
 {
 	t_matrix *mx;
 
 	if ((mx = (t_matrix*)malloc(sizeof(t_matrix))) == NULL)
-		error_malloc();
+		error('m');
 	mx->a1 = 1;
 	mx->b2 = 1;
 	mx->c3 = 1;

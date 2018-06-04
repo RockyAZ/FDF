@@ -12,10 +12,15 @@
 
 #include "fdf.h"
 
-int	windows_prepare(t_win *win)
+int	window_prepare(t_win *win)
 {
 	if (!(win->mlx_ptr = mlx_init()) ||
 	!(win->win_ptr = mlx_new_window(win->mlx_ptr, WIDTH, HEIGHT, win->name)))
 		return (0);
+	return (1);
+}
+
+int	map_prepare(t_win *win)
+{
 	return (1);
 }

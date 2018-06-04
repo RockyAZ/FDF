@@ -47,26 +47,11 @@ void ft_line_draw(t_win *win, double x0, double y0, double x1, double y1, int co
     mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, win->img_x, win->img_y);
 }
 
-void ft_start(t_win *win)
-{
-	if (!win->check)
-	{
-		win->x0 = 20;
-		win->y0 = 20;
-		win->x1 = 20;
-		win->y1 = 20;
-	}
-	else
-		win->check++;
-}
-
 void    draw_image(t_win *win)
 {
 	int x;
 	int y;
 
-	win->x1 = win->x0;
-	win->y1 = win->y0;
 	while (++y <= win->lines)
 	{
 		x = 0;

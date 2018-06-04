@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 all:
-	cc -I /Users/azaporoz/fdf/minilibx/ main.c reader.c drawer.c clean_img.c ../../fdf/libft/libft.a -L /Users/azaporoz/fdf/minilibx/ -lmlx -framework OpenGL -framework AppKit -o fdf
+	cc -I /Users/azaporoz/fdf/minilibx/ main.c reader.c preparation.c error.c ../../fdf/libft/libft.a -L /Users/azaporoz/fdf/minilibx/ -lmlx -framework OpenGL -framework AppKit -o fdf
 	@echo "\033[36m-----> (¬_¬) (ಠ_ಠ) <-----"
 
 #	@echo "\[033[36m\]-----> (¬_¬) (ಠ_ಠ) <-----"

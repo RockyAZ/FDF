@@ -12,9 +12,22 @@
 
 #include "fdf.h"
 
-void    error_malloc(void)
+void	fdf_exit(void)
 {
-	write(1, "malloc error\n", 13);
-//	ft_leaks_del();
-	exit(1);
+	exit(EXIT_FAILURE);
+}
+
+void	error(char c)
+{
+	if (c == 'm')
+		ft_putstr("malloc error\n");
+	else if (c == 'w')
+		ft_putstr("windows_open_error\n");
+	else if (c == 'a')
+		ft_putstr("usage:   ./fdf [map_name]\n");
+	else if (c == 'r')
+		ft_putstr("map error\n");
+	else if (c == 'o')
+		ft_putstr("open error\n");
+	fdf_exit();
 }

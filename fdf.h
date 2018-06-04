@@ -12,13 +12,16 @@
 
 #ifndef FDF_H
 # define FDF_H
+
 # define WIDTH 1800
 # define HEIGHT 1200
+
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define PINK 0xFF00FF
+
 # define KEY_UP 126
 # define KEY_DOWN 125
 # define KEY_LEFT 123
@@ -37,7 +40,8 @@
 # define MOVE_LEFT -100
 # define MOVE_RIGHT 100
 
-# define LENGTH 10
+# define MOVE_IN 1.1
+# define MOVE_OUT 0.9
 
 # include "../../fdf/libft/includes/libft.h"
 # include <mlx.h>
@@ -50,7 +54,7 @@ typedef struct	s_coord
 	double 		x;
 	double 		y;
 	double 		z;
-    double		a;
+    double		s;
 	double		color;
 }				t_coord;
 
@@ -58,23 +62,21 @@ typedef struct s_win
 {
     void       *mlx_ptr;
     void       *win_ptr;
+
     void       *img_ptr;
     int        bpp;
     int        size_line;
     int        endian;
     char       *ptr;
-    void       *xpm;
+
+	t_coord		**coord;
+
     char		*name;
-	int			img_x;
-	int			img_y;	
-    int        wx;
-    int        hy;
     int        fd;
     int        error;
     int        chars;
     int        lines;
     int        **map_coord;
-    int        check;
     int        color;
 }              t_win;
 
@@ -109,13 +111,14 @@ typedef struct s_image
 int				reader(t_win *win);
 void			draw_image(t_win *win);
 void			clean_img(t_win *win);
-void			error_malloc(void);
+void			error(char c);
 
 
 int				what_key(int key, t_win *win);
-t_matrix		*motion_use(t_win *win, double x, double y, double z);
+t_matrix		*move_use(t_win *win, double x, double y, double z);
 
-int	windows_prepare(t_win *win);
+int				window_prepare(t_win *win);
+int				map_prepare(t_win *map);
 
 
 #endif

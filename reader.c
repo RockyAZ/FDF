@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*
 int count_chars(t_win *win, char *line)
 {
     int x;
@@ -32,51 +32,60 @@ int count_chars(t_win *win, char *line)
     free(arr);
     return (1);
 }
-
+*/
 int count_line(t_win *win)
 {
-    char *line;
+	char *line;
+	int char_buf;
 
-    win->chars = 0;
-    win->lines = 0;
-    win->fd = open(win->name, O_RDONLY);
-    while (get_next_line(win->fd, &line) > 0)
-    {
-        if (!(count_chars(win, line)))
-            return (0);
-        win->lines++;
-        free(line);
-    }
-    close(win->fd);
-    win->fd = open(win->name, O_RDONLY);
-    return (1);
+	win->chars = 0;
+	win->lines = 0;
+	char_buf = 0;
+	win->fd = open(win->name, O_RDONLY);
+	while (get_next_line(win->fd, &line) > 0)
+	{
+		if (win->chars != 0)
+		{
+			if (ft_count_words(line) != win->chars)
+				return (0);
+		}
+		else
+			win->chars = ft_count_words(line);
+		win->lines++;
+		free(line);
+	}
+	close(win->fd);
+	win->fd = open(win->name, O_RDONLY);
+	return (1);
 }
-
+/*
+** RECURSIVE???
+*/
 int reader(t_win *win)
 {
-    char **arr;
-    char *line;
-    int i;
-    int j;
+	char **arr;
+	char *line;
+	int i;
+	int j;
 
 	if ((win->fd = open(win->name, O_RDONLY)) < 0)
-		return (write(1, "error_open\n", 11));
-    if (!(count_line(win)))
-        return (-1);
-    i = 0;
-    win->map_coord = (int**)ft_memalloc(sizeof(int*) * win->lines);
-    while (get_next_line(win->fd, &line))
-    {
-        arr = ft_strsplit(line, ' ');
-        j = 0;
-        win->map_coord[i] = (int*)ft_memalloc(sizeof(int) * win->chars);
-        while (arr[j])
-        {
-            win->map_coord[i][j] = ft_atoi(arr[j]);
-            j++;
-        }
-        free(line);
-        i++;
-    }
-    return (1);
+		error('o');
+	if (!(count_line(win)))
+		return (-1);
+	i = 0;
+	win->map_coord = (int**)ft_memalloc(sizeof(int*) * win->lines);
+	while (get_next_line(win->fd, &line))
+	{
+		arr = ft_strsplit(line, ' ');
+		j = 0;
+		win->map_coord[i] = (int*)ft_memalloc(sizeof(int) * win->chars);
+		while (arr[j])
+		{
+			win->map_coord[i][j] = ft_atoi(arr[j]);
+			j++;
+		}
+		free(line);
+		i++;
+	}
+	return (1);
 }

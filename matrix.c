@@ -12,12 +12,16 @@
 
 #include "fdf.h"
 
-void	matrix_scaling_plus(t_win *win, t_matrix *matrix)
+t_matrix	*matrix_scaling_plus(int scaling_size)
 {
-	matrix->a += 1;
-	matrix->e += 1;
-	matrix->i += 1;
-	matrix->s += 1;
+	t_matrix *matrix;
+
+	if ((matrix = (t_matrix*)malloc(sizeof(t_matrix))) == NULL)
+		error('m');
+	matrix->a1 = scaling_size;
+	matrix->b2 = scaling_size;
+	matrix->c3 = scaling_size;
+	matrix->d4 = 1;
 
 
 }
