@@ -60,23 +60,24 @@ typedef struct	s_coord
 
 typedef struct s_win
 {
-    void       *mlx_ptr;
-    void       *win_ptr;
+    void		*mlx_ptr;
+    void		*win_ptr;
 
-    void       *img_ptr;
-    int        bpp;
-    int        size_line;
-    int        endian;
-    char       *ptr;
+    void		*img_ptr;
+    int			bpp;
+    int			size_line;
+    int			endian;
+    char		*ptr;
+	t_coord		*center;
 
 	t_coord		**coord;
+	int			len;
 
     char		*name;
     int        fd;
     int        error;
     int        chars;
     int        lines;
-    int        **map_coord;
     int        color;
 }              t_win;
 
@@ -117,8 +118,7 @@ void			error(char c);
 int				what_key(int key, t_win *win);
 t_matrix		*move_use(t_win *win, double x, double y, double z);
 
+
 int				window_prepare(t_win *win);
-int				map_prepare(t_win *map);
-
-
+t_coord			*map_prepare(t_win *win, int x, int y, char *str);
 #endif

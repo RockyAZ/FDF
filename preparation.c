@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int	window_prepare(t_win *win)
+int		window_prepare(t_win *win)
 {
 	if (!(win->mlx_ptr = mlx_init()) ||
 	!(win->win_ptr = mlx_new_window(win->mlx_ptr, WIDTH, HEIGHT, win->name)))
@@ -20,7 +20,14 @@ int	window_prepare(t_win *win)
 	return (1);
 }
 
-int	map_prepare(t_win *win)
+t_coord	*map_prepare(t_win *win, int x, int y, char *str)
 {
-	return (1);
+	t_coord *coord;
+
+	if (!(coord = (t_coord*)malloc(sizeof(t_coord))))
+		error('m');
+	coord->x = x * win->len;
+	coord->y = y * win->len;
+	coord->z = ft_atoi(str);
+	return (coord);
 }

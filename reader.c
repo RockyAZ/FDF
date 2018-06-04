@@ -11,32 +11,24 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
-int count_chars(t_win *win, char *line)
-{
-    int x;
-    char **arr;
 
-    arr = ft_strsplit(line, ' ');
-    x = 0;
-    while (arr[x])
-    {
-        free(arr[x]);
-        x++;
-    }
-    if (win->chars == 0)
-        win->chars = x;
-    else
-        if (win->chars != x)
-            return (0);
-    free(arr);
-    return (1);
-}
-*/
-int count_line(t_win *win)
+static void	ft_arrr_del(char **arr)
 {
-	char *line;
-	int char_buf;
+	int i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+static int	count_line(t_win *win)
+{
+	char	*line;
+	int		char_buf;
 
 	win->chars = 0;
 	win->lines = 0;
@@ -56,36 +48,39 @@ int count_line(t_win *win)
 	}
 	close(win->fd);
 	win->fd = open(win->name, O_RDONLY);
+	win->len = (0.8 * ft_min(WIDTH, HEIGHT)) / ft_min(win->chars, win->lines);
 	return (1);
 }
+
 /*
 ** RECURSIVE???
 */
-int reader(t_win *win)
-{
-	char **arr;
-	char *line;
-	int i;
-	int j;
 
-	if ((win->fd = open(win->name, O_RDONLY)) < 0)
+int			reader(t_win *win)
+{
+	char	**arr;
+	char	*line;
+	int		i;
+	int		j;
+
+	if (((win->fd = open(win->name, O_RDONLY)) < 0) || !(count_line(win)))
 		error('o');
-	if (!(count_line(win)))
-		return (-1);
 	i = 0;
-	win->map_coord = (int**)ft_memalloc(sizeof(int*) * win->lines);
+	win->coord = (t_coord**)malloc(sizeof(t_coord) * (win->lines * win->chars));
 	while (get_next_line(win->fd, &line))
 	{
 		arr = ft_strsplit(line, ' ');
 		j = 0;
-		win->map_coord[i] = (int*)ft_memalloc(sizeof(int) * win->chars);
 		while (arr[j])
 		{
-			win->map_coord[i][j] = ft_atoi(arr[j]);
+			win->coord[(i * win->chars) + j] = map_prepare(win, j, i, arr[j]);
 			j++;
 		}
 		free(line);
+		ft_arrr_del(arr);
 		i++;
 	}
+	win->center->x = win->chars / 2;
+	win->center->y = win->lines / 2;
 	return (1);
 }

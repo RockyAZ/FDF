@@ -43,5 +43,6 @@ int main(int ac, char **av)
 		return(write(1, "windows_open_error\n", 19));
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
 	mlx_loop(win->mlx_ptr);
+system("leaks fdf");
 	return (1);
 }
