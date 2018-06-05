@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*
 t_matrix	*matrix_scaling_plus(int scaling_size)
 {
 	t_matrix *matrix;
@@ -23,9 +23,9 @@ t_matrix	*matrix_scaling_plus(int scaling_size)
 	matrix->c3 = scaling_size;
 	matrix->d4 = 1;
 
-
 }
-
+*/
+/*
 void	matrix(t_win *win)
 {
 	t_matrix *mx;
@@ -34,3 +34,4 @@ void	matrix(t_win *win)
 	if ()
 
 }
+*/

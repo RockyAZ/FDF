@@ -43,7 +43,7 @@
 # define MOVE_IN 1.1
 # define MOVE_OUT 0.9
 
-# include "../../fdf/libft/includes/libft.h"
+# include "./libft/libft.h"
 # include <mlx.h>
 # include <math.h>//#define M_PI == 3.14
 # include <fcntl.h>
@@ -100,14 +100,6 @@ typedef struct s_matrix
     double			d3;
     double			d4;
 }				t_matrix;
-/*
-typedef struct s_image
-{
-    int        bpp;
-    int        size_line;
-    int        endian;
-}
-*/
 
 int				reader(t_win *win);
 void			draw_image(t_win *win);
@@ -121,4 +113,12 @@ t_matrix		*move_use(t_win *win, double x, double y, double z);
 
 int				window_prepare(t_win *win);
 t_coord			*map_prepare(t_win *win, int x, int y, char *str);
+t_coord			*get_coord(t_win *win, int x, int y);
+void			center_prepare(t_win *win);
+t_matrix		*matrix_prepare(void);
+
+
+void	prepare_draw(t_win *win);
+
+void print_coord(t_win *win, int j);
 #endif

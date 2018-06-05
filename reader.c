@@ -80,7 +80,5 @@ int			reader(t_win *win)
 		ft_arrr_del(arr);
 		i++;
 	}
-	win->center->x = win->chars / 2;
-	win->center->y = win->lines / 2;
 	return (1);
 }

@@ -18,11 +18,6 @@
 */
 
 /*
-** узнать как захватывать зажатую клавишу
-** ответ:
-** хуй пойми как...
-** не, я все таки понял как!!!
-**
 ** рекурсивно записывать координаты???
 **
 **
@@ -41,8 +36,10 @@ int main(int ac, char **av)
 		return(write(1, "map_error\n", 10));
 	if (!window_prepare(win))
 		return(write(1, "windows_open_error\n", 19));
+	center_prepare(win);
+	print_coord(win, 9);
+	prepare_draw(win);
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
 	mlx_loop(win->mlx_ptr);
-system("leaks fdf");
 	return (1);
 }

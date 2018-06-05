@@ -16,8 +16,7 @@ t_matrix	*move_use(t_win *win, double x, double y, double z)
 {
 	t_matrix *mx;
 
-	if ((mx = (t_matrix*)malloc(sizeof(t_matrix))) == NULL)
-		error('m');
+	mx = matrix_prepare();
 	mx->a1 = 1;
 	mx->b2 = 1;
 	mx->c3 = 1;
