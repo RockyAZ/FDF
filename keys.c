@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-
+/*
 void	matrix_apply(t_coord *c, t_matrix *m, t_coord *center)
 {
 	double cp_x;
@@ -52,8 +52,8 @@ void	matrix_apply_caller(t_win *win, t_matrix *matrix)
 		y++;
 	}
 }
+*/
 
-/*
 void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 {
 	double cp_x;
@@ -68,9 +68,9 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 	cd1->x = m->a1 * cp_x + m->a2 * cp_y + m->a3 * cp_z + m->a4 * 1;
 	cd1->y = m->b1 * cp_x + m->b2 * cp_y + m->b3 * cp_z + m->b4 * 1;
 	cd1->z = m->c1 * cp_z + m->c2 * cp_z + m->c3 * cp_z + m->c4 * 1;
-	printf("\n--------------\ncd1::%f\n", cd1->x);
-	printf("cd1::%f\n", cd1->y);
-	printf("cd1::%f\n-------------\n\n", cd1->z);
+//	printf("\n--------------\ncd1::%f\n", cd1->x);
+//	printf("cd1::%f\n", cd1->y);
+//	printf("cd1::%f\n-------------\n\n", cd1->z);
 //	cd1->x += win->center->x;
 //	cd1->y += win->center->y;
 }
@@ -94,7 +94,7 @@ void    matrix_apply_caller(t_win *win, t_matrix *mx)
 		y++;
 	}
 }
-*/
+
 void    ft_reboot(int key, t_win *win)
 {
 	if (key == KEY_ESC || key == KEY_ENTER)
@@ -134,14 +134,14 @@ void	ft_color_switcher(int key,t_win *win)
 
 int		what_key(int key, t_win *win)
 {
-print_coord(win, 9);
-	printf("\n\n\n\n");
+//print_coord(win, 9);
+//	printf("\n\n\n\n");
 	ft_reboot(key, win);
 	ft_move(key, win);
 //	ft_scale(key, win);
 //	ft_color_switcher(key, win);
-print_coord(win, 9);
+//print_coord(win, 9);
 //	draw_image(win);
-//prepare_draw(win);
+prepare_draw(win);
 	return (0);
 }

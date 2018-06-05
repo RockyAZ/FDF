@@ -37,7 +37,7 @@ int main(int ac, char **av)
 	if (!window_prepare(win))
 		return(write(1, "windows_open_error\n", 19));
 	center_prepare(win);
-//	prepare_draw(win);
+	prepare_draw(win);
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
 	mlx_loop(win->mlx_ptr);
 	return (1);
