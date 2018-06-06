@@ -88,7 +88,7 @@ void    matrix_apply_caller(t_win *win, t_matrix *mx)
 		while (x < win->chars)
 		{
 //			cd1 = get_coord(win, x, y);
-				matrix_apply(win, get_coord(win, x, y), mx);
+				matrix_apply(win, win->coord[(y * win->chars) + x], mx);
 			x++;
 		}
 		y++;
@@ -140,7 +140,7 @@ int		what_key(int key, t_win *win)
 	ft_move(key, win);
 //	ft_scale(key, win);
 //	ft_color_switcher(key, win);
-//print_coord(win, 9);
+print_coord(win, 9);
 //	draw_image(win);
 prepare_draw(win);
 	return (0);

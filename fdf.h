@@ -13,8 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define WIDTH 1800
-# define HEIGHT 1200
+# define WIDTH 1000
+# define HEIGHT 750
 
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
@@ -113,7 +113,7 @@ t_matrix		*move_use(t_win *win, double x, double y, double z);
 
 int				window_prepare(t_win *win);
 t_coord			*map_prepare(t_win *win, int x, int y, char *str);
-t_coord			*get_coord(t_win *win, int x, int y);
+t_coord			get_coord(t_win *win, int x, int y);
 void			center_prepare(t_win *win);
 t_matrix		*matrix_prepare(void);
 

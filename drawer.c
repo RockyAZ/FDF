@@ -14,37 +14,41 @@
 /*
 ** КООРДИНАТЫ МЕНЯЮТЬСЯ ВО ВРЕМЯ РИСОВАНИЯ, ИЗМЕНИТЬ ЭТО!!!!
 */
-void ft_line_draw(t_win *win, t_coord *cd1, t_coord *cd2)
+
+void	get_buff(double *buff, t_coord cd1, t_coord cd2)
+{
+	buff[0] = fabs(cd2.x - cd1.x);
+	buff[1] = fabs(cd2.y - cd1.y);
+	buff[2] = cd1.x < cd2.x ? 1 : -1;
+	buff[3] = cd1.y < cd2.y ? 1 : -1;
+	buff[4] = (buff[0] > buff[1] ? buff[0] : -buff[1]) / 2;
+}
+
+
+void	ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
 {
 	int i;
-	double dx = fabs(cd2->x - cd1->x);
-	double dy = fabs(cd2->y - cd1->y);
-	double sx = cd1->x < cd2->x ? 1 : -1;
-	double sy = cd1->y < cd2->y ? 1 : -1;
-	double err = (dx > dy ? dx : -dy) / 2;//поделить на 2?->    ) / 2;
+	double buff[6];	
 	double cp_err;
-//  printf("cd1->x%f\n", cd1->x);
-//  printf("cd1->y%f\n\n", cd1->y);
-//  printf("cd2->x%f\n", cd2->x);
-//  printf("cd2->y%f\n\n\n\n", cd2->y);
-//		if (cd1->x < 0 || cd1->x >= WIDTH || cd1->y < 0 || cd1->y >= HEIGHT || cd2->x < 0 || cd2->x >= WIDTH || cd2->y < 0 || cd2->y >= HEIGHT)
+//	if (cd1.x < 0 || cd1.x >= WIDTH || cd1.y < 0 || cd1.y >= HEIGHT || cd2.x < 0 || cd2.x >= WIDTH || cd2.y < 0 || cd2.y >= HEIGHT)
 //		return ;
-	while (cd1->x <= cd2->x && cd1->y <= cd2->y)
+			get_buff(buff, cd1, cd2);
+	while (cd1.x <= cd2.x && cd1.y <= cd2.y)
 	{
-		i = (cd1->x * 4) + (cd1->y * win->size_line);
+		i = (cd1.x * 4) + (cd1.y * win->size_line);
 		win->ptr[i] = 0;
 		win->ptr[++i] = 120;
 		win->ptr[++i] = 0;
-		cp_err = err;
-		if (cp_err > -dx)
+		cp_err = buff[4];
+		if (cp_err > -buff[0])
 		{
-			err -= dy;
-			cd1->x += sx;
+			buff[4] -= buff[1];
+			cd1.x += buff[2];
 		}
-		if (cp_err < dy)
+		if (cp_err < buff[1])
 		{
-			err += dx;
-			cd1->y += sy;
+			buff[4] += buff[0];
+			cd1.y += buff[3];
 		}
 	}
     mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
@@ -55,6 +59,7 @@ void    draw_image(t_win *win)
 {
 	int x;
 	int y;
+	t_coord v;
 
 	y = 0;
 	while (y < win->lines)
@@ -62,10 +67,11 @@ void    draw_image(t_win *win)
 		x = 0;
 		while (x < win->chars)
 		{
+			v = get_coord(win, x, y);
 			if (x + 1 < win->chars)
-				ft_line_draw(win, win->coord[(y * win->chars) + x], win->coord[(y * win->chars) + (x + 1)]);
+				ft_line_draw(win, v, get_coord(win, x + 1, y));
 			if (y + 1 < win->lines)
-				ft_line_draw(win, win->coord[(y * win->chars) + x], win->coord[((y + 1)* win->chars) + x]);
+				ft_line_draw(win, v, get_coord(win, x, y + 1));
 			x++;
 		}
 		y++;

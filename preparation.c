@@ -57,9 +57,9 @@ t_matrix *matrix_prepare(void)
 	return (mx);
 }
 
-t_coord *get_coord(t_win *win, int x, int y)
+t_coord get_coord(t_win *win, int x, int y)
 {
-	return(win->coord[(y * win->chars) + x]);
+	return(*win->coord[(y * win->chars) + x]);
 }
 
 void	center_prepare(t_win *win)
