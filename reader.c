@@ -48,7 +48,7 @@ static int	count_line(t_win *win)
 	}
 	close(win->fd);
 	win->fd = open(win->name, O_RDONLY);
-	win->len = (0.8 * ft_min(WIDTH, HEIGHT)) / ft_min(win->chars, win->lines);
+	win->len = (0.5 * ft_min(WIDTH, HEIGHT)) / ft_min(win->chars, win->lines);
 	return (1);
 }
 
@@ -79,6 +79,6 @@ int			reader(t_win *win)
 		free(line);
 		ft_arrr_del(arr);
 		i++;
-	}
+	}	
 	return (1);
 }

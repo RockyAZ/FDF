@@ -26,14 +26,22 @@
 # define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_PLUS 69
+# define KEY_MINUS 78
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+
 # define KEY_ESC 53
 # define KEY_R 15
 # define KEY_G 5
 # define KEY_B 11
 # define KEY_ENTER 36
 # define KEY_C 8
-# define KEY_PLUS 69
-# define KEY_MINUS 78
+
+# define MOUSE_ZOOM_IN 5
+# define MOUSE_ZOOM_OUT 4
 
 # define MOVE_UP -100
 # define MOVE_DOWN 100
@@ -42,6 +50,10 @@
 
 # define MOVE_IN 1.1
 # define MOVE_OUT 0.9
+
+# define ANGLE_X M_PI / 10
+# define ANGLE_Y M_PI / 10
+# define ANGLE_Z M_PI / 40
 
 # include "./libft/libft.h"
 # include <mlx.h>
@@ -58,28 +70,28 @@ typedef struct	s_coord
 	double		color;
 }				t_coord;
 
-typedef struct s_win
+typedef struct		s_win
 {
-    void		*mlx_ptr;
-    void		*win_ptr;
+    void			*mlx_ptr;
+    void			*win_ptr;
 
-    void		*img_ptr;
-    int			bpp;
-    int			size_line;
-    int			endian;
-    char		*ptr;
-	t_coord		*center;
+    void			*img_ptr;
+    int				bpp;
+    int				size_line;
+    int				endian;
+    unsigned char	*ptr;
+	t_coord			center;
 
-	t_coord		**coord;
-	int			len;
+	t_coord			**coord;
+	int				len;
 
-    char		*name;
-    int        fd;
-    int        error;
-    int        chars;
-    int        lines;
-    int        color;
-}              t_win;
+    char			*name;
+    int        		fd;
+    int				error;
+    int				chars;
+    int				lines;
+    int				color;
+}					t_win;
 
 typedef struct s_matrix
 {
@@ -108,7 +120,20 @@ void			error(char c);
 
 
 int				what_key(int key, t_win *win);
-t_matrix		*move_use(t_win *win, double x, double y, double z);
+t_matrix		*scale_use(double s);
+t_matrix		*move_use(double x, double y, double z);
+t_matrix		*rotate_x_use(double angle);
+t_matrix		*rotate_y_use(double angle);
+t_matrix		*rotate_z_use(double angle);
+
+
+void			ft_move(int key, t_win *win, int len);
+void			ft_scale(int key, t_win *win);
+void			ft_rotate(int key, t_win *win);
+
+
+
+int		what_mouse(int button, int x, int y, t_win *win);
 
 
 int				window_prepare(t_win *win);

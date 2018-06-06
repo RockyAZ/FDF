@@ -67,11 +67,11 @@ void	center_prepare(t_win *win)
 	double x;
 	double y;
 
-	win->center = (t_coord*)malloc(sizeof(t_coord));
+//	win->center = (t_coord*)malloc(sizeof(t_coord));
 	x = (double)win->lines;
 	y = (double)win->chars;
-	win->center->x = 1;
-	win->center->y = 1;
+	win->center.x = 1;
+	win->center.y = 1;
 }
 
 void print_coord(t_win *win, int j)
@@ -80,6 +80,7 @@ void print_coord(t_win *win, int j)
 	{
 		printf("x:%f\n", win->coord[i]->x);
 		printf("y:%f\n", win->coord[i]->y);
-		printf("z:%f\n", win->coord[i]->z);		
+		printf("z:%f\n\n\n", win->coord[i]->z);		
 	}
+	printf("-----------------\n");
 }

@@ -39,6 +39,8 @@ int main(int ac, char **av)
 	center_prepare(win);
 	prepare_draw(win);
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
+	mlx_hook(win->win_ptr, 17, 0, &what_key, (void*)win);
+	mlx_hook(win->win_ptr, 4, 0, &what_mouse, (void*)win);//mouse
 	mlx_loop(win->mlx_ptr);
 	return (1);
 }
