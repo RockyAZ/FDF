@@ -73,10 +73,12 @@ void	center_prepare(t_win *win)
 	y = (((win->lines - 1) / 2.0f) + win->coord[0]->y / 100) * win->len;
 //	x = ((win->chars - 1) / 2.0f) * win->len;
 //	y = ((win->lines - 1) / 2.0f) * win->len;
-	printf("x_win::%f\n", win->coord[0]->x);
-	printf("y_win::%f\n", win->coord[0]->y);	
+//	printf("x_win::%f\n", win->coord[0]->x);
+//	printf("y_win::%f\n", win->coord[0]->y);	
 //	printf("CALC_X::%d\n", (((win->chars - 1) / 2) + (int)win->coord[0]->x) * win->len);
 //	printf("CALC_Y::%d\n", (((win->lines - 1) / 2) + (int)win->coord[0]->y) * win->len);
+//printf("XX::%f\n", x);
+//printf("YY::%f\n", y);
 
 	win->center.x = x;
 	win->center.y = y;
@@ -84,6 +86,8 @@ void	center_prepare(t_win *win)
 
 void print_coord(t_win *win, int j)
 {
+	if (j == 0)
+		j = win->lines * win->chars;
 	for(int i = 0; i < j; i++)
 	{
 		printf("x:%f\n", win->coord[i]->x);

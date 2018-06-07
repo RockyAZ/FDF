@@ -36,15 +36,15 @@ void			ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
 	int		i;
 	double	buff[5];
 	double	cp_err;
-
+//write(1, "1\n", 2);
 	get_buff(buff, cd1, cd2);
+//	mlx_clear_window (win->mlx_ptr, win->win_ptr);
+
 	while (cd1.x <= cd2.x && cd1.y <= cd2.y)
 	{
-//	if (cd1.x < 0 || cd1.x >= WIDTH || cd1.y < 0 || cd1.y >= HEIGHT ||
-//	cd2.x < 0 || cd2.x >= WIDTH || cd2.y < 0 || cd2.y >= HEIGHT)
-//		return ;
 		if (cd1.x >= 0 && cd1.x <= WIDTH && cd1.y >= 0 && cd1.y <= HEIGHT)
 			draw_point(&cd1, win, 0x0D6386);
+//	mlx_pixel_put(win->mlx_ptr, win->win_ptr, cd1.x, cd1.y, WHITE);
 		cp_err = buff[4];
 		if (cp_err > -buff[0])
 		{

@@ -13,8 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define WIDTH 1000
-# define HEIGHT 750
+# define WIDTH 1400
+# define HEIGHT 1000
 
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
@@ -52,8 +52,8 @@
 # define MOVE_IN 1.1
 # define MOVE_OUT 0.9
 
-# define ANGLE_X M_PI / 10
-# define ANGLE_Y M_PI / 10
+# define ANGLE_X M_PI / 50
+# define ANGLE_Y M_PI / 50
 # define ANGLE_Z M_PI / 50
 
 # include "./libft/libft.h"
@@ -61,7 +61,7 @@
 # include <math.h>//#define M_PI == 3.14
 # include <fcntl.h>
 #include <stdio.h>
-#define	EXIT_SUCCESS	0
+//#define	EXIT_SUCCESS	0
 typedef struct	s_coord
 {
 	double 		x;
@@ -73,6 +73,8 @@ typedef struct	s_coord
 
 typedef struct	s_mouse
 {
+    int			x;
+	int			y;
 	int			button_down;
 	int			move_mod;
 }				t_mouse;
@@ -132,6 +134,7 @@ void			clean_img(t_win *win);
 void			error(char c);
 
 
+
 int				what_key(int key, t_win *win);
 t_matrix		*scale_use(double s);
 t_matrix		*move_use(double x, double y, double z);
@@ -140,13 +143,17 @@ t_matrix		*rotate_y_use(double angle);
 t_matrix		*rotate_z_use(double angle);
 
 
+
 void			ft_move(int key, t_win *win, int len);
 void			ft_scale(int key, t_win *win);
 void			ft_rotate(int key, t_win *win);
 
 
 
-int		what_mouse(int button, int x, int y, t_win *win);
+int				mouse_down(int button, int x, int y, t_win *win);
+int				mouse_up(int button, int x, int y, t_win *win);
+int				mouse_moving(int button, int x, int y, t_win *win);
+
 
 
 int				window_prepare(t_win *win);

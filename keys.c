@@ -111,8 +111,6 @@ void	ft_color_switcher(int key, t_win *win)
 */
 int		what_key(int key, t_win *win)
 {
-	print_coord(win, 4);
-
 	if (key == KEY_SHIFT)
 		win->mouse.move_mod *= -1;
 	ft_reboot(key, win);
@@ -123,7 +121,6 @@ int		what_key(int key, t_win *win)
 	if ((key >=0 && key <= 2) || key == KEY_W)
 		ft_rotate(key, win);
 //	ft_color_switcher(key, win);
-	print_coord(win, 4);
 	prepare_draw(win);
 	return (0);
 }

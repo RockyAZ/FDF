@@ -23,7 +23,7 @@
 **
 ** itoabase для манипуляции с цветами
 
-
+индикатор отпускания клавиши???
 
 
 выделать память под матрицу в самом начале программы
@@ -66,7 +66,9 @@ int main(int ac, char **av)
 	prepare_draw(win);
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
 	mlx_hook(win->win_ptr, 17, 0, &what_key, (void*)win);
-	mlx_hook(win->win_ptr, 4, 0, &what_mouse, (void*)win);//mouse
+	mlx_hook(win->win_ptr, 4, 0, &mouse_down, (void*)win);//mouse
+	mlx_hook(win->win_ptr, 5, 0, &mouse_up, (void*)win);//mouse
+	mlx_hook(win->win_ptr, 6, 0, &mouse_moving, (void*)win);//mouse
 //	mlx_hook(win->win_ptr, 6, 0, hook_mousemove, (void*)win);//mouse coordinate
 //	mlx_loop_hook (win->win_ptr, &f, (void*)win);
 	mlx_loop(win->mlx_ptr);
