@@ -33,9 +33,9 @@ int main(int ac, char **av)
 		error('m');
 	win->name = av[1];
 	if ((reader(win)) == -1)
-		return(write(1, "map_error\n", 10));
+		error('r');
 	if (!window_prepare(win))
-		return(write(1, "windows_open_error\n", 19));
+		error('w');
 	center_prepare(win);
 	prepare_draw(win);
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);

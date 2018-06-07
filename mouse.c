@@ -14,10 +14,26 @@
 
 int		what_mouse(int button, int x, int y, t_win *win)
 {
-	if (button == MOUSE_ZOOM_IN)
-		what_key(69, win);
-	if (button == MOUSE_ZOOM_OUT)
-		what_key(78, win);
-printf("%d\n", button);
+	if (button == MOUSE_SCROLL_UP)
+	{
+		if (win->mouse.move_mod == -1)
+			ft_scale(button, win);
+		else
+			ft_move(button, win, MOVE_MOUSE);
+	}
+	if (button == MOUSE_SCROLL_DOWN)
+	{
+		if (win->mouse.move_mod == -1)
+			ft_scale(button, win);
+		else
+			ft_move(button, win, MOVE_MOUSE);
+	}
+	if (button == MOUSE_SCROLL_RIGHT)
+		ft_move(button, win, MOVE_MOUSE);
+	if (button == MOUSE_SCROLL_LEFT)
+		ft_move(button, win, MOVE_MOUSE);
+	if (win->mouse.move_mod == 1)
+		center_prepare(win);
+	prepare_draw(win);
 	return (0);
 }

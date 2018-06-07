@@ -32,6 +32,7 @@
 # define KEY_S 1
 # define KEY_A 0
 # define KEY_D 2
+# define KEY_SHIFT 257
 
 # define KEY_ESC 53
 # define KEY_R 15
@@ -40,13 +41,14 @@
 # define KEY_ENTER 36
 # define KEY_C 8
 
-# define MOUSE_ZOOM_IN 5
-# define MOUSE_ZOOM_OUT 4
+# define MOUSE_SCROLL_RIGHT 6
+# define MOUSE_SCROLL_LEFT 7
+# define MOUSE_SCROLL_UP 5
+# define MOUSE_SCROLL_DOWN 4
 
-# define MOVE_UP -100
-# define MOVE_DOWN 100
-# define MOVE_LEFT -100
-# define MOVE_RIGHT 100
+# define MOVE_KEY 100
+# define MOVE_MOUSE 37
+///////////////////
 
 # define MOVE_IN 1.1
 # define MOVE_OUT 0.9
@@ -70,19 +72,31 @@ typedef struct	s_coord
 	double		color;
 }				t_coord;
 
+typedef struct	s_mouse
+{
+	int			button_down;
+	int			move_mod;
+}				t_mouse;
+
 typedef struct		s_win
 {
+/*
+** main
+*/
     void			*mlx_ptr;
     void			*win_ptr;
-
+/*
+**image
+*/
     void			*img_ptr;
     int				bpp;
     int				size_line;
     int				endian;
     unsigned char	*ptr;
-	t_coord			center;
 
+	t_coord			center;
 	t_coord			**coord;
+    t_mouse			mouse;
 	int				len;
 
     char			*name;

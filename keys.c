@@ -70,13 +70,13 @@ void	ft_move(int key, t_win *win, int len)
 {
 	t_matrix *matrix;
 
-	if (key == KEY_RIGHT)
+	if (key == KEY_RIGHT || key == MOUSE_SCROLL_RIGHT)
 		matrix = move_use(len, 0, 0);
-	if (key == KEY_LEFT)
+	if (key == KEY_LEFT || key == MOUSE_SCROLL_LEFT)
 		matrix = move_use(-len, 0, 0);
-	if (key == KEY_UP)
+	if (key == KEY_UP || key == MOUSE_SCROLL_UP)
 		matrix = move_use(0, -len, 0);
-	if (key == KEY_DOWN)
+	if (key == KEY_DOWN || key == MOUSE_SCROLL_DOWN)
 		matrix = move_use(0, len, 0);
 	center_prepare(win);
 	matrix_apply_caller(win, matrix);
@@ -87,9 +87,9 @@ void	ft_scale(int key, t_win *win)
 {
 	t_matrix *matrix;
 
-	if (key == KEY_PLUS)
+	if (key == KEY_PLUS || key == MOUSE_SCROLL_UP)
 		matrix = scale_use(MOVE_IN);
-	if (key == KEY_MINUS)
+	if (key == KEY_MINUS || key == MOUSE_SCROLL_DOWN)
 		matrix = scale_use(MOVE_OUT);
 	matrix_apply_caller(win, matrix);
 	free(matrix);
@@ -117,9 +117,11 @@ void	ft_color_switcher(int key, t_win *win)
 
 int		what_key(int key, t_win *win)
 {
+	if (key == KEY_SHIFT)
+		win->mouse.move_mod *= -1;
 	ft_reboot(key, win);
 	if (key >= 123 && key <= 126)
-		ft_move(key, win,);
+		ft_move(key, win, MOVE_KEY);
 	if (key == KEY_MINUS || key == KEY_PLUS)
 		ft_scale(key, win);
 	if ((key >=0 && key <= 2) || key == KEY_W)

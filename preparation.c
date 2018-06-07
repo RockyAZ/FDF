@@ -17,6 +17,8 @@ int		window_prepare(t_win *win)
 	if (!(win->mlx_ptr = mlx_init()) ||
 	!(win->win_ptr = mlx_new_window(win->mlx_ptr, WIDTH, HEIGHT, win->name)))
 		return (0);
+	win->mouse.button_down = 0;
+	win->mouse.move_mod = 1;
 	return (1);
 }
 
