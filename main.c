@@ -22,8 +22,15 @@
 **
 **
 ** itoabase для манипуляции с цветами
+
+
+
+
+выделать память под матрицу в самом начале программы
 */
 
+
+/*
 int		hook_mousemove(int x, int y, t_win *win)
 {
 	printf("3x::%d\n", x);
@@ -41,7 +48,7 @@ int f(t_win *win)
 	i++;
 	return (0);
 }
-
+*/
 int main(int ac, char **av)
 {
    	t_win *win;

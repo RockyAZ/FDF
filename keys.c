@@ -36,7 +36,6 @@ void    matrix_apply_caller(t_win *win, t_matrix *mx)
 
 	int x;
 	int y;
-	t_coord *cd1;
 
 	y = 0;
 	while (y < win->lines)
@@ -104,12 +103,12 @@ void	ft_rotate(int key, t_win *win)
 	matrix_apply_caller(win, matrix);
 	free(matrix);
 }
-
+/*
 void	ft_color_switcher(int key, t_win *win)
 {
 
 }
-
+*/
 int		what_key(int key, t_win *win)
 {
 	print_coord(win, 4);

@@ -69,12 +69,15 @@ void	center_prepare(t_win *win)
 	double x;
 	double y;
 
-	x = (((win->chars - 1) / 2.0f) + win->coord[0]->x) * win->len;
-	y = (((win->lines - 1) / 2.0f) + win->coord[0]->y) * win->len;
-	printf("X%f\n", x);
-	printf("Y%f\n", y);
+	x = (((win->chars - 1) / 2.0f) + win->coord[0]->x / 100) * win->len;
+	y = (((win->lines - 1) / 2.0f) + win->coord[0]->y / 100) * win->len;
 //	x = ((win->chars - 1) / 2.0f) * win->len;
 //	y = ((win->lines - 1) / 2.0f) * win->len;
+	printf("x_win::%f\n", win->coord[0]->x);
+	printf("y_win::%f\n", win->coord[0]->y);	
+//	printf("CALC_X::%d\n", (((win->chars - 1) / 2) + (int)win->coord[0]->x) * win->len);
+//	printf("CALC_Y::%d\n", (((win->lines - 1) / 2) + (int)win->coord[0]->y) * win->len);
+
 	win->center.x = x;
 	win->center.y = y;
 }

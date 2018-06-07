@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
-** КООРДИНАТЫ МЕНЯЮТЬСЯ ВО ВРЕМЯ РИСОВАНИЯ, ИЗМЕНИТЬ ЭТО!!!!
-*/
 
 static void		draw_point(t_coord *cd, t_win *win, int color)
 {
@@ -25,7 +22,7 @@ static void		draw_point(t_coord *cd, t_win *win, int color)
 	win->ptr[++i] = color >> 16;
 }
 
-void	get_buff(double *buff, t_coord cd1, t_coord cd2)
+void			get_buff(double *buff, t_coord cd1, t_coord cd2)
 {
 	buff[0] = fabs(cd2.x - cd1.x);
 	buff[1] = fabs(cd2.y - cd1.y);
@@ -34,16 +31,17 @@ void	get_buff(double *buff, t_coord cd1, t_coord cd2)
 	buff[4] = (buff[0] > buff[1] ? buff[0] : -buff[1]) / 2;
 }
 
-void	ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
+void			ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
 {
-	int i;
-	double buff[5];	
-	double cp_err;
+	int		i;
+	double	buff[5];
+	double	cp_err;
 
 	get_buff(buff, cd1, cd2);
 	while (cd1.x <= cd2.x && cd1.y <= cd2.y)
 	{
-//	if (cd1.x < 0 || cd1.x >= WIDTH || cd1.y < 0 || cd1.y >= HEIGHT || cd2.x < 0 || cd2.x >= WIDTH || cd2.y < 0 || cd2.y >= HEIGHT)
+//	if (cd1.x < 0 || cd1.x >= WIDTH || cd1.y < 0 || cd1.y >= HEIGHT ||
+//	cd2.x < 0 || cd2.x >= WIDTH || cd2.y < 0 || cd2.y >= HEIGHT)
 //		return ;
 		if (cd1.x >= 0 && cd1.x <= WIDTH && cd1.y >= 0 && cd1.y <= HEIGHT)
 			draw_point(&cd1, win, 0x0D6386);
@@ -62,11 +60,12 @@ void	ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
 	}
 }
 
-void    draw_image(t_win *win)
+void			draw_image(t_win *win)
 {
-	int x;
-	int y;
-	t_coord v;
+	int		x;
+	int		y;
+	t_coord	v;
+
 	y = 0;
 	while (y < win->lines)
 	{
@@ -84,7 +83,7 @@ void    draw_image(t_win *win)
 	}
 }
 
-void	prepare_draw(t_win *win)
+void			prepare_draw(t_win *win)
 {
 	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
 	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
@@ -94,6 +93,6 @@ void	prepare_draw(t_win *win)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: MOVING");
 	else
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: SCALING");
-	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 15, PINK, "to change mod press [SHIFT]");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 15, PINK, "press [SHIFT] to change mod");
 	mlx_destroy_image(win->mlx_ptr, win->img_ptr);
 }
