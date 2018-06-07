@@ -48,14 +48,13 @@
 
 # define MOVE_KEY 100
 # define MOVE_MOUSE 37
-///////////////////
 
 # define MOVE_IN 1.1
 # define MOVE_OUT 0.9
 
 # define ANGLE_X M_PI / 10
 # define ANGLE_Y M_PI / 10
-# define ANGLE_Z M_PI / 40
+# define ANGLE_Z M_PI / 50
 
 # include "./libft/libft.h"
 # include <mlx.h>

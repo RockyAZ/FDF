@@ -69,11 +69,14 @@ void	center_prepare(t_win *win)
 	double x;
 	double y;
 
-//	win->center = (t_coord*)malloc(sizeof(t_coord));
-	x = (double)win->lines;
-	y = (double)win->chars;
-	win->center.x = 1;
-	win->center.y = 1;
+	x = (((win->chars - 1) / 2.0f) + win->coord[0]->x) * win->len;
+	y = (((win->lines - 1) / 2.0f) + win->coord[0]->y) * win->len;
+	printf("X%f\n", x);
+	printf("Y%f\n", y);
+//	x = ((win->chars - 1) / 2.0f) * win->len;
+//	y = ((win->lines - 1) / 2.0f) * win->len;
+	win->center.x = x;
+	win->center.y = y;
 }
 
 void print_coord(t_win *win, int j)

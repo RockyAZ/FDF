@@ -26,7 +26,6 @@ t_matrix	*rotate_z_use(double angle)
 	return (mx);
 }
 
-
 t_matrix	*rotate_y_use(double angle)
 {
 	t_matrix *mx;
@@ -40,7 +39,6 @@ t_matrix	*rotate_y_use(double angle)
 //	mx->d4 = 1;
 	return (mx);
 }
-
 
 t_matrix	*rotate_x_use(double angle)
 {
@@ -56,7 +54,6 @@ t_matrix	*rotate_x_use(double angle)
 	return (mx);
 }
 
-
 t_matrix	*scale_use(double s)
 {
 	t_matrix *mx;
@@ -65,7 +62,7 @@ t_matrix	*scale_use(double s)
 	mx->a1 = s;
 	mx->b2 = s;
 	mx->c3 = s;
-	mx->d4 = 1;
+//	mx->d4 = 1;
 	return (mx);
 }
 
@@ -77,9 +74,9 @@ t_matrix	*move_use(double x, double y, double z)
 	mx->a1 = 1;
 	mx->b2 = 1;
 	mx->c3 = 1;
-	mx->d4 = 1;
 	mx->a4 = x;
 	mx->b4 = y;
 	mx->c4 = z;
+//	mx->d4 = 1;
 	return (mx);
 }

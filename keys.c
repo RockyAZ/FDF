@@ -17,12 +17,13 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 	double cp_x;
 	double cp_y;
 	double cp_z;
-
+//	printf("CENTER_X::%f\n", win->center.x);
+//	printf("CENTER_Y::%f\n\n", win->center.y);
+	cd1->x -= win->center.x;
+	cd1->y -= win->center.y;
 	cp_x = cd1->x;
 	cp_y = cd1->y;
 	cp_z = cd1->z;
-	cd1->x -= win->center.x;
-	cd1->y -= win->center.y;
 	cd1->x = m->a1 * cp_x + m->a2 * cp_y + m->a3 * cp_z + m->a4 * 1;
 	cd1->y = m->b1 * cp_x + m->b2 * cp_y + m->b3 * cp_z + m->b4 * 1;
 	cd1->z = m->c1 * cp_z + m->c2 * cp_z + m->c3 * cp_z + m->c4 * 1;
@@ -37,12 +38,7 @@ void    matrix_apply_caller(t_win *win, t_matrix *mx)
 	int y;
 	t_coord *cd1;
 
-//write(1, "a\n", 2);
-
 	y = 0;
-//	 printf("%d\n", win->lines);
-//write(1, "b\n", 2);
-
 	while (y < win->lines)
 	{
 		x = 0;
@@ -97,7 +93,6 @@ void	ft_scale(int key, t_win *win)
 
 void	ft_rotate(int key, t_win *win)
 {
-	print_coord(win, 4);
 	t_matrix *matrix;
 
 	if (key == KEY_W)
@@ -117,6 +112,8 @@ void	ft_color_switcher(int key, t_win *win)
 
 int		what_key(int key, t_win *win)
 {
+	print_coord(win, 4);
+
 	if (key == KEY_SHIFT)
 		win->mouse.move_mod *= -1;
 	ft_reboot(key, win);
@@ -127,6 +124,7 @@ int		what_key(int key, t_win *win)
 	if ((key >=0 && key <= 2) || key == KEY_W)
 		ft_rotate(key, win);
 //	ft_color_switcher(key, win);
+	print_coord(win, 4);
 	prepare_draw(win);
 	return (0);
 }
