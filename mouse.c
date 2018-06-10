@@ -13,7 +13,7 @@
 #include "fdf.h"
 
 int		mouse_down(int button, int x, int y, t_win *win)
-{//printf("1::%d\n\n", win->mouse.button_down);
+{
 	win->mouse.x = x;
 	win->mouse.y = y;
 	matrix_prepare(win);
@@ -28,7 +28,7 @@ int		mouse_down(int button, int x, int y, t_win *win)
 }
 
 int		mouse_up(int button, int x, int y, t_win *win)
-{//printf("2::%d\n\n", win->mouse.button_down);
+{
 	win->mouse.x = x;
 	win->mouse.y = y;
 	win->mouse.button_down = 0;
@@ -36,13 +36,10 @@ int		mouse_up(int button, int x, int y, t_win *win)
 }
 
 int		mouse_moving(int x, int y, t_win *win)
-{//printf("3::%d\n", win->mouse.button_down);
-//write(1, "3\n", 2);
-
+{
 	matrix_prepare(win);
 	if (win->mouse.button_down && win->mouse.move_mod == 1)
 	{
-//write(1, "AAA\n", 4);
 		if (win->mouse.x > x)
 			ft_move(KEY_RIGHT, win, -(win->mouse.x - x));
 		if (win->mouse.x < x)

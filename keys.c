@@ -21,7 +21,8 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 //	cd1->x -= win->center.x;
 //	cd1->y -= win->center.y;
 	cd1->x -= win->mouse.x;
-	cd1->y -= win->mouse.y;	
+	cd1->y -= win->mouse.y;
+//	cd1->z -= ((win->lim_z[0] + win->lim_z[1]) / 2);
 	cp_x = cd1->x;
 	cp_y = cd1->y;
 	cp_z = cd1->z;
@@ -32,6 +33,7 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 //	cd1->y += win->center.y;
 	cd1->x += win->mouse.x;
 	cd1->y += win->mouse.y;	
+//	cd1->z += ((win->lim_z[0] + win->lim_z[1]) / 2);
 }
 
 void    matrix_apply_caller(t_win *win, t_matrix *mx)

@@ -58,122 +58,108 @@
 
 # include "./libft/libft.h"
 # include <mlx.h>
-# include <math.h>//#define M_PI == 3.14
+# include <math.h>
 # include <fcntl.h>
-#include <stdio.h>
-//#define	EXIT_SUCCESS	0
-typedef struct	s_coord
-{
-	double 		x;
-	double 		y;
-	double 		z;
-    double		s;
-	double		color;
-}				t_coord;
+# include <stdio.h>
 
-typedef struct	s_mouse
+typedef struct		s_coord
 {
-    int			x;
-	int			y;
-	int			button_down;
-	int			move_mod;
-}				t_mouse;
+	double			x;
+	double			y;
+	double			z;
+	double			s;
+	double			color;
+}					t_coord;
 
-typedef struct s_matrix
+typedef struct		s_mouse
 {
-    double			a1;
-    double			a2;
-    double			a3;
-    double			a4;
-    double			b1;
-    double			b2;
-    double			b3;
-    double			b4;
-    double			c1;
-    double			c2;
-    double			c3;
-    double			c4;
-    double			d1;
-    double			d2;
-    double			d3;
-    double			d4;
-}				t_matrix;
+	int				x;
+	int				y;
+	int				button_down;
+	int				move_mod;
+}					t_mouse;
 
-typedef struct		s_win
+typedef struct		s_matrix
 {
-/*
-** main
-*/
-    void			*mlx_ptr;
-    void			*win_ptr;
-/*
-**image
-*/
-    void			*img_ptr;
-    int				bpp;
-    int				size_line;
-    int				endian;
-    unsigned char	*ptr;
-
-	t_coord			center;
-	t_coord			**coord;
+	double			a1;
+	double			a2;
+	double			a3;
+	double			a4;
+	double			b1;
+	double			b2;
+	double			b3;
+	double			b4;
+	double			c1;
+	double			c2;
+	double			c3;
+	double			c4;
+	double			d1;
+	double			d2;
+	double			d3;
+	double			d4;
+}					t_matrix;
 /*
 ** lim_z[0] == min z
 ** lim_z[1] == max z
 */
+typedef struct		s_win
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	int				bpp;
+	int				size_line;
+	int				endian;
+	unsigned char	*ptr;
+	t_coord			center;
+	t_coord			**coord;
 	int				lim_z[2];
-    t_mouse			mouse;
+	t_mouse			mouse;
 	t_matrix		matrix;
 	int				len;
-
-    char			*name;
-    int        		fd;
-    int				error;
-    int				chars;
-    int				lines;
-    int				color;
+	char			*name;
+	int				fd;
+	int				error;
+	int				chars;
+	int				lines;
 }					t_win;
 
-int				reader(t_win *win);
-void			draw_image(t_win *win);
-void			clean_img(t_win *win);
-void			error(char c);
-
-
-
-int				what_key(int key, t_win *win);
-
-void			move_use(double x, double y, double z, t_matrix *mx);
-void			scale_use(double s, t_matrix *mx);
-void			rotate_x_use(double angle, t_matrix *mx);
-void			rotate_y_use(double angle, t_matrix *mx);
-void			rotate_z_use(double angle, t_matrix *mx);
-
-
-
-
-void	ft_move(int key, t_win *win, int len);
-void	ft_scale(int key, t_win *win);
-void	ft_rotate(int key, t_win *win);
-
-
-
-int				mouse_down(int button, int x, int y, t_win *win);
-int				mouse_up(int button, int x, int y, t_win *win);
-int				mouse_moving(int x, int y, t_win *win);
-
-
-
-
-int				window_prepare(t_win *win);
-t_coord			*map_prepare(t_win *win, int x, int y, char *str);
-t_coord			get_coord(t_win *win, int x, int y);
-void			center_prepare(t_win *win);
-void			matrix_prepare(t_win *win);
-
-
-
-void	prepare_draw(t_win *win);
-
-void print_coord(t_win *win, int j);
+int					reader(t_win *win);
+void				draw_image(t_win *win);
+void				clean_img(t_win *win);
+void				error(char c);
+/*
+** mouse and key handlers
+*/
+void				ft_move(int key, t_win *win, int len);
+void				ft_scale(int key, t_win *win);
+void				ft_rotate(int key, t_win *win);
+/*
+** \/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+*/
+int					what_key(int key, t_win *win);
+void				move_use(double x, double y, double z, t_matrix *mx);
+void				scale_use(double s, t_matrix *mx);
+void				rotate_x_use(double angle, t_matrix *mx);
+void				rotate_y_use(double angle, t_matrix *mx);
+void				rotate_z_use(double angle, t_matrix *mx);
+/*
+** \/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+*/
+int					mouse_down(int button, int x, int y, t_win *win);
+int					mouse_up(int button, int x, int y, t_win *win);
+int					mouse_moving(int x, int y, t_win *win);
+/*
+** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+*/
+int					window_prepare(t_win *win);
+t_coord				*map_prepare(t_win *win, int x, int y, char *str);
+t_coord				get_coord(t_win *win, int x, int y);
+void				center_prepare(t_win *win);
+void				matrix_prepare(t_win *win);
+void				prepare_draw(t_win *win);
+/*
+** to debuging
+*/
+void				print_coord(t_win *win, int j);
 #endif
