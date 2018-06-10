@@ -135,7 +135,7 @@ void				ft_move(int key, t_win *win, int len);
 void				ft_scale(int key, t_win *win);
 void				ft_rotate(int key, t_win *win);
 /*
-** \/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+** \/\/\/\/\/\/\/\/\/\/\/\/\/\
 */
 int					what_key(int key, t_win *win);
 void				move_use(double x, double y, double z, t_matrix *mx);
@@ -144,13 +144,13 @@ void				rotate_x_use(double angle, t_matrix *mx);
 void				rotate_y_use(double angle, t_matrix *mx);
 void				rotate_z_use(double angle, t_matrix *mx);
 /*
-** \/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+** \/\/\/\/\/\/\/\/\/\/\/\/\/\
 */
 int					mouse_down(int button, int x, int y, t_win *win);
 int					mouse_up(int button, int x, int y, t_win *win);
 int					mouse_moving(int x, int y, t_win *win);
 /*
-** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+** \/\/\/\/\/\/\/\/\/\/\/\/\/\
 */
 int					window_prepare(t_win *win);
 t_coord				*map_prepare(t_win *win, int x, int y, char *str);

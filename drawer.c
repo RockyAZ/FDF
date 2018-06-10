@@ -90,8 +90,11 @@ void			draw_image(t_win *win)
 
 void			prepare_draw(t_win *win)
 {
-	char *x = ft_itoa(win->coord[0]->x);
-	char *y = ft_itoa(win->coord[0]->y);
+//	char *x = ft_itoa(win->coord[0]->x);
+//	char *y = ft_itoa(win->coord[0]->y);
+//center_prepare(win);
+	char *x = ft_itoa(win->center.x);
+	char *y = ft_itoa(win->center.y);
 	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
 	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
 	draw_image(win);

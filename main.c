@@ -74,3 +74,6 @@ int main(int ac, char **av)
 	mlx_loop(win->mlx_ptr);
 	return (1);
 }
+/*
+** 	центер отстаёт как какой то кусок дерьма
+*/
