@@ -34,29 +34,24 @@ t_coord	*map_prepare(t_win *win, int x, int y, char *str)
 	return (coord);
 }
 
-t_matrix *matrix_prepare(void)
+void	matrix_prepare(t_win *win)
 {
-	t_matrix *mx;
-
-	if ((mx = (t_matrix*)malloc(sizeof(t_matrix))) == NULL)
-		error('m');
-	mx->a1 = 0;
-	mx->a2 = 0;
-	mx->a3 = 0;
-	mx->a4 = 0;
-	mx->b1 = 0;
-	mx->b2 = 0;
-	mx->b3 = 0;
-	mx->b4 = 0;
-	mx->c1 = 0;
-	mx->c2 = 0;
-	mx->c3 = 0;
-	mx->c4 = 0;
-	mx->d1 = 0;
-	mx->d2 = 0;
-	mx->d3 = 0;
-	mx->d4 = 0;
-	return (mx);
+	win->matrix.a1 = 0;
+	win->matrix.a2 = 0;
+	win->matrix.a3 = 0;
+	win->matrix.a4 = 0;
+	win->matrix.b1 = 0;
+	win->matrix.b2 = 0;
+	win->matrix.b3 = 0;
+	win->matrix.b4 = 0;
+	win->matrix.c1 = 0;
+	win->matrix.c2 = 0;
+	win->matrix.c3 = 0;
+	win->matrix.c4 = 0;
+	win->matrix.d1 = 0;
+	win->matrix.d2 = 0;
+	win->matrix.d3 = 0;
+	win->matrix.d4 = 0;
 }
 
 t_coord get_coord(t_win *win, int x, int y)
@@ -86,6 +81,7 @@ void	center_prepare(t_win *win)
 
 void print_coord(t_win *win, int j)
 {
+//	system("clear");
 	if (j == 0)
 		j = win->lines * win->chars;
 	for(int i = 0; i < j; i++)

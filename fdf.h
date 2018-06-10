@@ -79,35 +79,6 @@ typedef struct	s_mouse
 	int			move_mod;
 }				t_mouse;
 
-typedef struct		s_win
-{
-/*
-** main
-*/
-    void			*mlx_ptr;
-    void			*win_ptr;
-/*
-**image
-*/
-    void			*img_ptr;
-    int				bpp;
-    int				size_line;
-    int				endian;
-    unsigned char	*ptr;
-
-	t_coord			center;
-	t_coord			**coord;
-    t_mouse			mouse;
-	int				len;
-
-    char			*name;
-    int        		fd;
-    int				error;
-    int				chars;
-    int				lines;
-    int				color;
-}					t_win;
-
 typedef struct s_matrix
 {
     double			a1;
@@ -128,6 +99,36 @@ typedef struct s_matrix
     double			d4;
 }				t_matrix;
 
+typedef struct		s_win
+{
+/*
+** main
+*/
+    void			*mlx_ptr;
+    void			*win_ptr;
+/*
+**image
+*/
+    void			*img_ptr;
+    int				bpp;
+    int				size_line;
+    int				endian;
+    unsigned char	*ptr;
+
+	t_coord			center;
+	t_coord			**coord;
+    t_mouse			mouse;
+	t_matrix		matrix;
+	int				len;
+
+    char			*name;
+    int        		fd;
+    int				error;
+    int				chars;
+    int				lines;
+    int				color;
+}					t_win;
+
 int				reader(t_win *win);
 void			draw_image(t_win *win);
 void			clean_img(t_win *win);
@@ -136,23 +137,26 @@ void			error(char c);
 
 
 int				what_key(int key, t_win *win);
-t_matrix		*scale_use(double s);
-t_matrix		*move_use(double x, double y, double z);
-t_matrix		*rotate_x_use(double angle);
-t_matrix		*rotate_y_use(double angle);
-t_matrix		*rotate_z_use(double angle);
+
+void			move_use(double x, double y, double z, t_matrix *mx);
+void			scale_use(double s, t_matrix *mx);
+void			rotate_x_use(double angle, t_matrix *mx);
+void			rotate_y_use(double angle, t_matrix *mx);
+void			rotate_z_use(double angle, t_matrix *mx);
 
 
 
-void			ft_move(int key, t_win *win, int len);
-void			ft_scale(int key, t_win *win);
-void			ft_rotate(int key, t_win *win);
+
+void	ft_move(int key, t_win *win, int len);
+void	ft_scale(int key, t_win *win);
+void	ft_rotate(int key, t_win *win);
 
 
 
 int				mouse_down(int button, int x, int y, t_win *win);
 int				mouse_up(int button, int x, int y, t_win *win);
-int				mouse_moving(int button, int x, int y, t_win *win);
+int				mouse_moving(int x, int y, t_win *win);
+
 
 
 
@@ -160,7 +164,8 @@ int				window_prepare(t_win *win);
 t_coord			*map_prepare(t_win *win, int x, int y, char *str);
 t_coord			get_coord(t_win *win, int x, int y);
 void			center_prepare(t_win *win);
-t_matrix		*matrix_prepare(void);
+void			matrix_prepare(t_win *win);
+
 
 
 void	prepare_draw(t_win *win);

@@ -12,6 +12,16 @@
 
 #include "fdf.h"
 
+void			get_buff(double *buff, t_coord cd1, t_coord cd2)
+{
+	buff[0] = fabs(cd1.x - cd2.x);
+	buff[1] = fabs(cd1.y - cd2.y);
+	buff[2] = cd1.x < cd2.x ? 1 : -1;
+	buff[3] = cd1.y < cd2.y ? 1 : -1;
+	buff[4] = (buff[0] > buff[1] ? buff[0] : -buff[1]);
+}
+
+
 static void		draw_point(t_coord *cd, t_win *win, int color)
 {
 	int i;
@@ -22,39 +32,34 @@ static void		draw_point(t_coord *cd, t_win *win, int color)
 	win->ptr[++i] = color >> 16;
 }
 
-void			get_buff(double *buff, t_coord cd1, t_coord cd2)
-{
-	buff[0] = fabs(cd2.x - cd1.x);
-	buff[1] = fabs(cd2.y - cd1.y);
-	buff[2] = cd1.x < cd2.x ? 1 : -1;
-	buff[3] = cd1.y < cd2.y ? 1 : -1;
-	buff[4] = (buff[0] > buff[1] ? buff[0] : -buff[1]) / 2;
-}
-
 void			ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
 {
 	int		i;
 	double	buff[5];
 	double	cp_err;
-//write(1, "1\n", 2);
-	get_buff(buff, cd1, cd2);
-//	mlx_clear_window (win->mlx_ptr, win->win_ptr);
+	int state;
 
-	while (cd1.x <= cd2.x && cd1.y <= cd2.y)
+	if (cd1.x < 0 && cd1.x > WIDTH && cd1.y < 0 && cd1.y > HEIGHT)
+		return ;
+	get_buff(buff, cd1, cd2);
+	state = 1;
+	while ((state == 1) && !((int)cd1.x == (int)cd2.x && (int)cd1.y == (int)cd2.y))
 	{
 		if (cd1.x >= 0 && cd1.x <= WIDTH && cd1.y >= 0 && cd1.y <= HEIGHT)
 			draw_point(&cd1, win, 0x0D6386);
-//	mlx_pixel_put(win->mlx_ptr, win->win_ptr, cd1.x, cd1.y, WHITE);
 		cp_err = buff[4];
-		if (cp_err > -buff[0])
+		state = 0;
+		if (cp_err > -buff[0] && (int)cd1.x != (int)cd2.x)
 		{
 			buff[4] -= buff[1];
 			cd1.x += buff[2];
+			state = 1;
 		}
-		if (cp_err < buff[1])
+		if (cp_err < buff[1] && (int)cd1.y != (int)cd2.y)
 		{
 			buff[4] += buff[0];
 			cd1.y += buff[3];
+			state = 1;			
 		}
 		i = 0;
 	}

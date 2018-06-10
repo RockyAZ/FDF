@@ -13,59 +13,45 @@
 #include "fdf.h"
 
 int		mouse_down(int button, int x, int y, t_win *win)
-{write(1, "1\n", 2);
-//printf("%d\n\n", win->mouse.button_down);
-	win->mouse.button_down = 1;
+{//printf("1::%d\n\n", win->mouse.button_down);
 	win->mouse.x = x;
-	win->mouse.y = y;	
+	win->mouse.y = y;
+	matrix_prepare(win);
 	if (button == MOUSE_SCROLL_UP)
-	{
-		if (win->mouse.move_mod == -1)
 			ft_scale(button, win);
-		else
-			ft_move(button, win, MOVE_MOUSE);
-	}
-	if (button == MOUSE_SCROLL_DOWN)
-	{
-		if (win->mouse.move_mod == -1)
+	else if (button == MOUSE_SCROLL_DOWN)
 			ft_scale(button, win);
-		else
-			ft_move(button, win, MOVE_MOUSE);
-	}
-	if (button == MOUSE_SCROLL_RIGHT)
-		ft_move(button, win, MOVE_MOUSE);
-	if (button == MOUSE_SCROLL_LEFT)
-		ft_move(button, win, MOVE_MOUSE);
-	if (win->mouse.move_mod == 1)
-		center_prepare(win);
+	else
+		win->mouse.button_down = 1;
 	prepare_draw(win);
 	return (0);
 }
 
 int		mouse_up(int button, int x, int y, t_win *win)
-{//write(1, "2\n", 2);
-//printf("%d\n\n", win->mouse.button_down);
+{//printf("2::%d\n\n", win->mouse.button_down);
 	win->mouse.button_down = 0;
 	return (0);
 }
 
-int		mouse_moving(int button, int x, int y, t_win *win)
-{
-printf("%d\n", win->mouse.button_down);
-//printf("%d\n", win->fd);
+int		mouse_moving(int x, int y, t_win *win)
+{//printf("3::%d\n", win->mouse.button_down);
+//write(1, "3\n", 2);
+
+	matrix_prepare(win);
 	if (win->mouse.button_down && win->mouse.move_mod == 1)
 	{
-printf("X:%d\nY:%d\n\n", x, y);
+//write(1, "AAA\n", 4);
 		if (win->mouse.x > x)
-			ft_move(KEY_RIGHT, win, win->mouse.x - x);
-		else if (win->mouse.x < x)
+			ft_move(KEY_RIGHT, win, -(win->mouse.x - x));
+		if (win->mouse.x < x)
 			ft_move(KEY_LEFT, win, win->mouse.x - x);
-		else if (win->mouse.y > y)
-			ft_move(KEY_DOWN, win, win->mouse.y - y);
-		else if (win->mouse.y < y)
+		if (win->mouse.y > y)
+			ft_move(KEY_DOWN, win, -(win->mouse.y - y));
+		if (win->mouse.y < y)
 			ft_move(KEY_UP, win, win->mouse.y - y);
-		win->mouse.x = x;
-		win->mouse.y = y;
 	}
+	win->mouse.x = x;
+	win->mouse.y = y;
+	prepare_draw(win);
 	return (0);
 }
