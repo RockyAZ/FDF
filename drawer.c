@@ -90,6 +90,8 @@ void			draw_image(t_win *win)
 
 void			prepare_draw(t_win *win)
 {
+	char *x = ft_itoa(win->coord[0]->x);
+	char *y = ft_itoa(win->coord[0]->y);
 	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
 	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
 	draw_image(win);
@@ -99,5 +101,11 @@ void			prepare_draw(t_win *win)
 	else
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: SCALING");
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 15, PINK, "press [SHIFT] to change mod");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 30, RED, "X: ");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 30, GREEN, x);
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 45, RED, "Y: ");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 45, GREEN, y);
+	free(x);
+	free(y);
 	mlx_destroy_image(win->mlx_ptr, win->img_ptr);
 }

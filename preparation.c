@@ -31,6 +31,10 @@ t_coord	*map_prepare(t_win *win, int x, int y, char *str)
 	coord->x = x * win->len;
 	coord->y = y * win->len;
 	coord->z = ft_atoi(str);
+	if (coord->z < win->lim_z[0])
+		win->lim_z[0] = coord->z;
+	if (coord->z > win->lim_z[1])
+		win->lim_z[1] = coord->z;
 	return (coord);
 }
 

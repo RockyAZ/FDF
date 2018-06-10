@@ -29,6 +29,8 @@ int		mouse_down(int button, int x, int y, t_win *win)
 
 int		mouse_up(int button, int x, int y, t_win *win)
 {//printf("2::%d\n\n", win->mouse.button_down);
+	win->mouse.x = x;
+	win->mouse.y = y;
 	win->mouse.button_down = 0;
 	return (0);
 }

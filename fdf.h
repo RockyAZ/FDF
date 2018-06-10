@@ -117,6 +117,11 @@ typedef struct		s_win
 
 	t_coord			center;
 	t_coord			**coord;
+/*
+** lim_z[0] == min z
+** lim_z[1] == max z
+*/
+	int				lim_z[2];
     t_mouse			mouse;
 	t_matrix		matrix;
 	int				len;
