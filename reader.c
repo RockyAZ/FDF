@@ -81,6 +81,6 @@ int			reader(t_win *win)
 		free(line);
 		ft_arrr_del(arr);
 		i++;
-	}	
+	}
 	return (1);
 }

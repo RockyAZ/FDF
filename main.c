@@ -50,6 +50,7 @@ int f(t_win *win)
 	return (0);
 }
 */
+
 int main(int ac, char **av)
 {
    	t_win *win;

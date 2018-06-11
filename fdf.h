@@ -33,6 +33,7 @@
 # define KEY_A 0
 # define KEY_D 2
 # define KEY_SHIFT 257
+# define KEY_TAB 48
 
 # define KEY_ESC 53
 # define KEY_R 15
@@ -77,6 +78,7 @@ typedef struct		s_mouse
 	int				y;
 	int				button_down;
 	int				move_mod;
+	int				mouse_center;
 }					t_mouse;
 
 typedef struct		s_matrix

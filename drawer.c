@@ -37,7 +37,7 @@ void			ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
 	int		i;
 	double	buff[5];
 	double	cp_err;
-	int state;
+	int		state;
 
 	if (cd1.x < 0 && cd1.x > WIDTH && cd1.y < 0 && cd1.y > HEIGHT)
 		return ;
@@ -90,11 +90,11 @@ void			draw_image(t_win *win)
 
 void			prepare_draw(t_win *win)
 {
-//	char *x = ft_itoa(win->coord[0]->x);
-//	char *y = ft_itoa(win->coord[0]->y);
-//center_prepare(win);
-	char *x = ft_itoa(win->center.x);
-	char *y = ft_itoa(win->center.y);
+	char *x;
+	char *y;
+
+	x = ft_itoa(win->center.x);
+	y = ft_itoa(win->center.y);
 	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
 	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
 	draw_image(win);
@@ -103,6 +103,10 @@ void			prepare_draw(t_win *win)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: MOVING");
 	else
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: SCALING");
+	if (win->mouse.mouse_center)
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK, "CENTER: MOUSE POSITION");
+	else
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK, "CENTER: CENTER MAP");	
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 15, PINK, "press [SHIFT] to change mod");
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 30, RED, "X: ");
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 30, GREEN, x);

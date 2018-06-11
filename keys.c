@@ -18,30 +18,42 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 	double cp_y;
 	double cp_z;
 
-	cd1->x -= win->center.x;
-	cd1->y -= win->center.y;
-//	cd1->x -= win->mouse.x;
-//	cd1->y -= win->mouse.y;
-//	cd1->z -= ((win->lim_z[0] + win->lim_z[1]) / 2);
+	if (!win->mouse.mouse_center)
+	{
+		cd1->x -= win->center.x;
+		cd1->y -= win->center.y;
+	}
+	else
+	{
+		cd1->x -= win->mouse.x;
+		cd1->y -= win->mouse.y;
+	}
+//	cd1->z -= ((win->lim_z[0] + win->lim_z[1]) / 2);	
 	cp_x = cd1->x;
 	cp_y = cd1->y;
 	cp_z = cd1->z;
 	cd1->x = m->a1 * cp_x + m->a2 * cp_y + m->a3 * cp_z + m->a4 * 1;
 	cd1->y = m->b1 * cp_x + m->b2 * cp_y + m->b3 * cp_z + m->b4 * 1;
 	cd1->z = m->c1 * cp_z + m->c2 * cp_z + m->c3 * cp_z + m->c4 * 1;
-	cd1->x += win->center.x;
-	cd1->y += win->center.y;
-//	cd1->x += win->mouse.x;
-//	cd1->y += win->mouse.y;	
+	if (!win->mouse.mouse_center)
+	{
+		cd1->x += win->center.x;
+		cd1->y += win->center.y;
+	}
+	else
+	{
+		cd1->x += win->mouse.x;
+		cd1->y += win->mouse.y;
+	}
 //	cd1->z += ((win->lim_z[0] + win->lim_z[1]) / 2);
 }
 
 void    matrix_apply_caller(t_win *win, t_matrix *mx)
 {
-
 	int x;
 	int y;
 
+//	center_prepare(win);
 	y = 0;
 	while (y < win->lines)
 	{
@@ -110,6 +122,8 @@ int		what_key(int key, t_win *win)
 	matrix_prepare(win);
 	if (key == KEY_SHIFT)
 		win->mouse.move_mod *= -1;
+	if (key == KEY_TAB)
+		win->mouse.mouse_center = 1;
 	ft_reboot(key, win);
 	if (key >= 123 && key <= 126)
 		ft_move(key, win, MOVE_KEY);
