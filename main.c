@@ -50,6 +50,39 @@ int f(t_win *win)
 	return (0);
 }
 */
+void drawcircle(int x0, int y0, int radius, t_win *win)
+{
+    int x = radius-1;
+    int y = 0;
+    int dx = 1;
+    int dy = 1;
+    int err = dx - (radius << 1);
+
+    while (x >= y)
+    {
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + x, y0 + y, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + y, y0 + x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - y, y0 + x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - x, y0 + y, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - x, y0 - y, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - y, y0 - x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + y, y0 - x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + x, y0 - y, WHITE);
+        if (err <= 0)
+        {
+            y++;
+            err += dy;
+            dy += 2;
+        }
+        
+        if (err > 0)
+        {
+            x--;
+            dx += 2;
+            err += dx - (radius << 1);
+        }
+    }
+}
 
 int main(int ac, char **av)
 {
@@ -66,6 +99,7 @@ int main(int ac, char **av)
 		error('w');
 	center_prepare(win);
 	prepare_draw(win);
+//	drawcircle(100, 100, 25, win);
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
 	mlx_hook(win->win_ptr, 17, 0, &what_key, (void*)win);
 	mlx_hook(win->win_ptr, 4, 0, &mouse_down, (void*)win);

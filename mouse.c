@@ -49,6 +49,18 @@ int		mouse_moving(int x, int y, t_win *win)
 		if (win->mouse.y < y)
 			ft_move(KEY_UP, win, win->mouse.y - y);
 	}
+
+	else if (win->mouse.button_down && win->mouse.move_mod == -1)
+	{
+		if (win->mouse.x > x)
+			ft_move(KEY_RIGHT, win, -(win->mouse.x - x));
+		if (win->mouse.x < x)
+			ft_move(KEY_LEFT, win, win->mouse.x - x);
+		if (win->mouse.y > y)
+			ft_move(KEY_DOWN, win, -(win->mouse.y - y));
+		if (win->mouse.y < y)
+			ft_move(KEY_UP, win, win->mouse.y - y);
+	}
 	win->mouse.x = x;
 	win->mouse.y = y;
 	prepare_draw(win);

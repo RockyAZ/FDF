@@ -33,6 +33,7 @@
 # define KEY_A 0
 # define KEY_D 2
 # define KEY_SHIFT 257
+# define KEY_B 11
 # define KEY_TAB 48
 
 # define KEY_ESC 53
@@ -53,9 +54,9 @@
 # define MOVE_IN 1.1
 # define MOVE_OUT 0.9
 
-# define ANGLE_X M_PI / 50
-# define ANGLE_Y M_PI / 50
-# define ANGLE_Z M_PI / 50
+# define ANGLE_X M_PI / 20
+# define ANGLE_Y M_PI / 20
+# define ANGLE_Z M_PI / 30
 
 # include "./libft/libft.h"
 # include <mlx.h>
@@ -116,6 +117,7 @@ typedef struct		s_win
 	t_coord			center;
 	t_coord			**coord;
 	int				lim_z[2];
+	int				pas[6];
 	t_mouse			mouse;
 	t_matrix		matrix;
 	int				len;
@@ -133,9 +135,11 @@ void				error(char c);
 /*
 ** mouse and key handlers
 */
+void				ft_reboot(int key, t_win *win);
 void				ft_move(int key, t_win *win, int len);
 void				ft_scale(int key, t_win *win);
-void				ft_rotate(int key, t_win *win);
+void				ft_rotate(int key, t_win *win, double angle);
+void			    matrix_apply_caller(t_win *win, t_matrix *mx);
 /*
 ** \/\/\/\/\/\/\/\/\/\/\/\/\/\
 */
@@ -164,4 +168,6 @@ void				prepare_draw(t_win *win);
 ** to debuging
 */
 void				print_coord(t_win *win, int j);
+void	pasx(int key, t_win *win);
+
 #endif

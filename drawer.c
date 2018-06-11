@@ -21,7 +21,6 @@ void			get_buff(double *buff, t_coord cd1, t_coord cd2)
 	buff[4] = (buff[0] > buff[1] ? buff[0] : -buff[1]);
 }
 
-
 static void		draw_point(t_coord *cd, t_win *win, int color)
 {
 	int i;
@@ -103,7 +102,7 @@ void			prepare_draw(t_win *win)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: MOVING");
 	else
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: SCALING");
-	if (win->mouse.mouse_center)
+	if (win->mouse.mouse_center == 1)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK, "CENTER: MOUSE POSITION");
 	else
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK, "CENTER: CENTER MAP");	

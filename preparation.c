@@ -22,11 +22,20 @@ int		window_prepare(t_win *win)
 		return (0);
 	win->mouse.button_down = 0;
 	win->mouse.move_mod = 1;
-	win->mouse.mouse_center = 0;
-	while (i++ < 3)
+	win->mouse.mouse_center = -1;
+	while (i++ < 2)
+	{
 		ft_move(KEY_RIGHT, win, MOVE_KEY);
-	while (i++ < 7)
+		ft_rotate(KEY_D, win, ANGLE_X);
+	}
+	while (i++ < 5)
+	{
 		ft_move(KEY_DOWN, win, MOVE_KEY);
+		ft_rotate(KEY_W, win, ANGLE_X);
+	}
+	i = 0;
+	while (i < 6)
+		win->pas[i++] = 0;
 	return (1);
 }
 
@@ -78,27 +87,12 @@ void	center_prepare(t_win *win)
 
 	x = (win->coord[0]->x + win->coord[win->lines * win->chars - 1]->x) / 2;
 	y = (win->coord[0]->y + win->coord[win->lines * win->chars - 1]->y) / 2;
-	// print_coord(win, 0);
-	// printf("first_X::%f\n", win->coord[0]->x);
-	// printf("first_Y::%f\n\n", win->coord[0]->y);
-
-	// printf("last_X::%f\n", win->coord[win->chars - 1]->x);
-	// printf("last_Y::%f\n\n", win->coord[win->lines * win->chars - 1]->y);
-
-	// printf("x_win::%f\n", x);
-	// printf("y_win::%f\n\n\n", y);
-//	printf("CALC_X::%d\n", (((win->chars - 1) / 2) + (int)win->coord[0]->x) * win->len);
-//	printf("CALC_Y::%d\n", (((win->lines - 1) / 2) + (int)win->coord[0]->y) * win->len);
-//printf("XX::%f\n", x);
-//printf("YY::%f\n", y);
-
 	win->center.x = x;
 	win->center.y = y;
 }
 
 void print_coord(t_win *win, int j)
 {
-//	system("clear");
 	if (j == 0)
 		j = win->lines * win->chars;
 	for(int i = 0; i < j; i++)
