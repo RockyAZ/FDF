@@ -16,7 +16,6 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 {
 	double cp_x;
 	double cp_y;
-	double cp_z;
 
 	if (win->mouse.mouse_center == -1)
 	{
@@ -28,12 +27,16 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 		cd1->x -= win->mouse.x;
 		cd1->y -= win->mouse.y;
 	}
-	cp_x = cd1->x;
-	cp_y = cd1->y;
-	cp_z = cd1->z;
-	cd1->x = m->a1 * cp_x + m->a2 * cp_y + m->a3 * cp_z + m->a4 * 1;
-	cd1->y = m->b1 * cp_x + m->b2 * cp_y + m->b3 * cp_z + m->b4 * 1;
+//	cp_x = cd1->x;
+//	cp_y = cd1->y;
+//	cp_z = cd1->z;
+//	cd1->x = m->a1 * cp_x + m->a2 * cp_y + m->a3 * cp_z + m->a4 * 1;
+//	cd1->y = m->b1 * cp_x + m->b2 * cp_y + m->b3 * cp_z + m->b4 * 1;
 //	cd1->z = m->c1 * cp_z + m->c2 * cp_z + m->c3 * cp_z + m->c4 * 1;
+	cp_x = m->a1 * cd1->x + m->a2 * cd1->y + m->a3 * cd1->z + m->a4 * 1;
+	cp_y = m->b1 * cd1->x + m->b2 * cd1->y + m->b3 * cd1->z + m->b4 * 1;
+	cd1->x = cp_x;
+	cd1->y = cp_y;
 	if (win->mouse.mouse_center == -1)
 	{
 		cd1->x += win->center.x;
@@ -69,6 +72,7 @@ void	ft_color_switcher(int key, t_win *win)
 
 }
 */
+
 int		what_key(int key, t_win *win)
 {
 	matrix_prepare(win);
