@@ -75,11 +75,6 @@ void	matrix_prepare(t_win *win)
 	win->matrix.d4 = 0;
 }
 
-t_coord get_coord(t_win *win, int x, int y)
-{
-	return(*win->coord[(y * win->chars) + x]);
-}
-
 void	center_prepare(t_win *win)
 {
 	double x;
@@ -89,6 +84,11 @@ void	center_prepare(t_win *win)
 	y = (win->coord[0]->y + win->coord[win->lines * win->chars - 1]->y) / 2;
 	win->center.x = x;
 	win->center.y = y;
+}
+
+t_coord get_coord(t_win *win, int x, int y)
+{
+	return(*win->coord[(y * win->chars) + x]);
 }
 
 void print_coord(t_win *win, int j)
