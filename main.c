@@ -12,6 +12,12 @@
 
 #include "fdf.h"
 
+int	ft_exit(void)
+{
+	exit(EXIT_SUCCESS);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_win *win;
@@ -28,7 +34,7 @@ int	main(int ac, char **av)
 	center_prepare(win);
 	prepare_draw(win);
 	mlx_hook(win->win_ptr, 2, 0, &what_key, (void*)win);
-	mlx_hook(win->win_ptr, 17, 0, &what_key, (void*)win);
+	mlx_hook(win->win_ptr, 17, 0, &ft_exit, (void*)win);
 	mlx_hook(win->win_ptr, 4, 0, &mouse_down, (void*)win);
 	mlx_hook(win->win_ptr, 5, 0, &mouse_up, (void*)win);
 	mlx_hook(win->win_ptr, 6, 0, &mouse_moving, (void*)win);

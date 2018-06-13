@@ -12,15 +12,6 @@
 
 #include "fdf.h"
 
-static void	re(t_win *win)
-{
-	int i;
-
-	i = 0;
-	while (i < 6)
-		win->pas[i++] = 0;
-}
-
 static int	check(t_win *win)
 {
 	int i;
@@ -72,7 +63,7 @@ void		pasx(int key, t_win *win)
 	else if (check(win) == 2)
 		pasx_active(win);
 //	else
-		while (i < 6)
-			win->pas[i++] = 0;
+	while (i < 6)
+		win->pas[i++] = 0;
 	
 }

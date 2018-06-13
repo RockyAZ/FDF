@@ -95,6 +95,15 @@ typedef struct		s_mouse
 	int				mouse_center;
 }					t_mouse;
 
+typedef struct		s_circle
+{
+	double			x;
+	double			y;
+	int				vx;
+	int				vy;
+	int				rad;
+}					t_circle;
+
 typedef struct		s_matrix
 {
 	double			a1;
@@ -121,7 +130,9 @@ typedef struct		s_matrix
 typedef struct		s_win
 {
 	void			*mlx_ptr;
+	void			*mlx_ptr_pasx;
 	void			*win_ptr;
+	void			*win_ptr_pasx;
 	void			*img_ptr;
 	int				bpp;
 	int				size_line;
@@ -133,6 +144,7 @@ typedef struct		s_win
 	int				pas[6];
 	t_mouse			mouse;
 	t_matrix		matrix;
+	t_circle		circle;
 	int				len;
 	char			*name;
 	int				fd;
@@ -154,6 +166,7 @@ void				ft_scale(int key, t_win *win);
 void				ft_rotate(int key, t_win *win, double angle);
 void				ft_height(int key, t_win *win);
 void				matrix_apply_caller(t_win *win, t_matrix *mx);
+int					ft_exit(void);
 /*
 ** \/\/\/\/\/\/\/\/\/\/\/\/\/\
 */
@@ -181,7 +194,11 @@ void				prepare_draw(t_win *win);
 /*
 ** helper
 */
-void				pasx(int key, t_win *win);
 int					get_color(t_coord *coord, double z);
 void				str_out(t_win *win);
+/*
+** pasxalka
+*/
+void				pasx(int key, t_win *win);
+void				pasx_active(t_win *win);
 #endif

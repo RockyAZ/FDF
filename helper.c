@@ -29,7 +29,7 @@ int		get_color(t_coord *coord, double z)
 
 t_coord	get_coord(t_win *win, int x, int y)
 {
-	return(*win->coord[(y * win->chars) + x]);
+	return (*win->coord[(y * win->chars) + x]);
 }
 
 void	str_out(t_win *win)
@@ -42,13 +42,13 @@ void	str_out(t_win *win)
 	if (win->mouse.move_mod == 1)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: MOVING");
 	else
-		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: SCALING");
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: ROTATING");
 	if (win->mouse.mouse_center == 1)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK,
 		"CENTER: MOUSE POSITION");
 	else
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK,
-		"CENTER: CENTER MAP");	
+		"CENTER: CENTER MAP");
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 75, BLUE,
 	"press [TAB] to change CENTER mod");
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 15, BLUE,

@@ -12,22 +12,34 @@
 
 #include "fdf.h"
 
-int		mouse_down(int button, int x, int y, t_win *win)
+static void	addition(t_win *win, int x, int y)
+{
+	if (win->mouse.x > x)
+		ft_rotate(KEY_D, win, -(M_PI / 120));
+	if (win->mouse.x < x)
+		ft_rotate(KEY_D, win, M_PI / 120);
+	if (win->mouse.y > y)
+		ft_rotate(KEY_W, win, -(M_PI / 120));
+	if (win->mouse.y < y)
+		ft_rotate(KEY_W, win, M_PI / 120);
+}
+
+int			mouse_down(int button, int x, int y, t_win *win)
 {
 	win->mouse.x = x;
 	win->mouse.y = y;
 	matrix_prepare(win);
 	if (button == MOUSE_SCROLL_UP)
-			ft_scale(button, win);
+		ft_scale(button, win);
 	else if (button == MOUSE_SCROLL_DOWN)
-			ft_scale(button, win);
+		ft_scale(button, win);
 	else if (button == 1)
 		win->mouse.button_down = 1;
 	prepare_draw(win);
 	return (0);
 }
 
-int		mouse_up(int button, int x, int y, t_win *win)
+int			mouse_up(int button, int x, int y, t_win *win)
 {
 	(void)button;
 	win->mouse.x = x;
@@ -36,7 +48,7 @@ int		mouse_up(int button, int x, int y, t_win *win)
 	return (0);
 }
 
-int		mouse_moving(int x, int y, t_win *win)
+int			mouse_moving(int x, int y, t_win *win)
 {
 	matrix_prepare(win);
 	if (win->mouse.button_down && win->mouse.move_mod == 1)
@@ -51,16 +63,7 @@ int		mouse_moving(int x, int y, t_win *win)
 			ft_move(KEY_UP, win, win->mouse.y - y);
 	}
 	else if (win->mouse.button_down && win->mouse.move_mod == -1)
-	{
-		if (win->mouse.x > x)
-			ft_rotate(KEY_D, win, -(M_PI / 120));
-		if (win->mouse.x < x)
-			ft_rotate(KEY_D, win, M_PI / 120);
-		if (win->mouse.y > y)
-			ft_rotate(KEY_W, win, -(M_PI / 120));
-		if (win->mouse.y < y)
-			ft_rotate(KEY_W, win, M_PI / 120);
-	}
+		addition(win, x, y);
 	win->mouse.x = x;
 	win->mouse.y = y;
 	prepare_draw(win);

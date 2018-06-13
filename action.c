@@ -46,7 +46,7 @@ void		scale_use(double s, t_matrix *mx)
 	mx->c3 = s;
 }
 
-void	move_use(double x, double y, double z, t_matrix *mx)
+void		move_use(double x, double y, double z, t_matrix *mx)
 {
 	mx->a1 = 1;
 	mx->b2 = 1;

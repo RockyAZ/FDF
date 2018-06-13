@@ -19,6 +19,7 @@ void			get_buff(double *buff, t_coord cd1, t_coord cd2)
 	buff[2] = cd1.x < cd2.x ? 1 : -1;
 	buff[3] = cd1.y < cd2.y ? 1 : -1;
 	buff[4] = (buff[0] > buff[1] ? buff[0] : -buff[1]);
+	buff[6] = 1;
 }
 
 static void		draw_point(t_coord *cd, t_win *win, int color)
@@ -31,36 +32,31 @@ static void		draw_point(t_coord *cd, t_win *win, int color)
 	win->ptr[++i] = color >> 16;
 }
 
-void			ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
+void			ft_line_draw(t_win *win, t_coord v1, t_coord v2)
 {
-	int		i;
-	double	buff[5];
-	double	cp_err;
-	int		state;
+	double	buff[7];
 
-	if (cd1.x < 0 && cd1.x > WIDTH && cd1.y < 0 && cd1.y > HEIGHT)
+	if (v1.x < 0 && v1.x > WIDTH && v1.y < 0 && v1.y > HEIGHT)
 		return ;
-	get_buff(buff, cd1, cd2);
-	state = 1;
-	while ((state == 1) && !((int)cd1.x == (int)cd2.x && (int)cd1.y == (int)cd2.y))
+	get_buff(buff, v1, v2);
+	while (buff[6] == 1 && !((int)v1.x == (int)v2.x && (int)v1.y == (int)v2.y))
 	{
-		if (cd1.x >= 0 && cd1.x <= WIDTH && cd1.y >= 0 && cd1.y <= HEIGHT)
-			draw_point(&cd1, win, cd1.color);
-		cp_err = buff[4];
-		state = 0;
-		if (cp_err > -buff[0] && (int)cd1.x != (int)cd2.x)
+		if (v1.x >= 0 && v1.x <= WIDTH && v1.y >= 0 && v1.y <= HEIGHT)
+			draw_point(&v1, win, v1.color);
+		buff[5] = buff[4];
+		buff[6] = 0;
+		if (buff[5] > -buff[0] && (int)v1.x != (int)v2.x)
 		{
 			buff[4] -= buff[1];
-			cd1.x += buff[2];
-			state = 1;
+			v1.x += buff[2];
+			buff[6] = 1;
 		}
-		if (cp_err < buff[1] && (int)cd1.y != (int)cd2.y)
+		if (buff[5] < buff[1] && (int)v1.y != (int)v2.y)
 		{
 			buff[4] += buff[0];
-			cd1.y += buff[3];
-			state = 1;			
+			v1.y += buff[3];
+			buff[6] = 1;
 		}
-		i = 0;
 	}
 }
 
@@ -90,7 +86,8 @@ void			draw_image(t_win *win)
 void			prepare_draw(t_win *win)
 {
 	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
-	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
+	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr,
+	&win->bpp, &win->size_line, &win->endian);
 	draw_image(win);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 	str_out(win);
