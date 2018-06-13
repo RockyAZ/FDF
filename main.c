@@ -19,13 +19,6 @@ int	ft_exit(void)
 	return (1);
 }
 
-// int	ghost (t_win *win)
-// {
-// 	int i;
-
-// 	return (0);
-// }
-
 int	main(int ac, char **av)
 {
 	t_win *win;
@@ -46,7 +39,6 @@ int	main(int ac, char **av)
 	mlx_hook(win->win_ptr, 4, 0, &mouse_down, (void*)win);
 	mlx_hook(win->win_ptr, 5, 0, &mouse_up, (void*)win);
 	mlx_hook(win->win_ptr, 6, 0, &mouse_moving, (void*)win);
-//	mlx_loop_hook(win->mlx_ptr, &ghost, win);
 	mlx_loop(win->mlx_ptr);
 	return (1);
 }

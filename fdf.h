@@ -97,8 +97,8 @@ typedef struct		s_mouse
 
 typedef struct		s_circle
 {
-	double			x;
-	double			y;
+	int				x;
+	int				y;
 	int				vx;
 	int				vy;
 	int				rad;
@@ -133,6 +133,7 @@ typedef struct		s_win
 	void			*mlx_ptr_pasx;
 	void			*win_ptr;
 	void			*win_ptr_pasx;
+	int				pasx_active;
 	void			*img_ptr;
 	int				bpp;
 	int				size_line;

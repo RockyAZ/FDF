@@ -86,7 +86,8 @@ void			draw_image(t_win *win)
 void			prepare_draw(t_win *win)
 {
 	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
-	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
+	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp,
+	&win->size_line, &win->endian);
 	draw_image(win);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 	str_out(win);

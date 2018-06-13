@@ -23,6 +23,7 @@ int		window_prepare(t_win *win)
 	win->mouse.button_down = 0;
 	win->mouse.move_mod = 1;
 	win->mouse.mouse_center = -1;
+	win->pasx_active = 0;
 	while (i++ < 2)
 	{
 		ft_move(KEY_RIGHT, win, MOVE_KEY);

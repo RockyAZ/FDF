@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	ft_reboot(int key, t_win *win)
+void			ft_reboot(int key, t_win *win)
 {
 	if (key == KEY_ESC || key == KEY_ENTER)
 	{

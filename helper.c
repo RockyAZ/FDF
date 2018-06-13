@@ -42,7 +42,7 @@ void	str_out(t_win *win)
 	if (win->mouse.move_mod == 1)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: MOVING");
 	else
-		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: ROTATING");
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: ROTATE");
 	if (win->mouse.mouse_center == 1)
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK,
 		"CENTER: MOUSE POSITION");

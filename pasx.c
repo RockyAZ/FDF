@@ -62,8 +62,6 @@ void		pasx(int key, t_win *win)
 		return ;
 	else if (check(win) == 2)
 		pasx_active(win);
-//	else
 	while (i < 6)
 		win->pas[i++] = 0;
-	
 }
