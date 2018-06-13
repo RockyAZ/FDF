@@ -18,28 +18,11 @@ static void	put_circle(t_win *win, int x, int y, int color)
 
 	i = (x * 4) + (y * win->size_line);
 	win->ptr[i] = color;
+	win->ptr[i + 3] = 40;
 }
 
 static void	draw_circle(t_win *win, int x0, int y0, int x, int y)
 {
-	// int i;
-
-	// i = ((x0 + x) * 4) + ((y0 + y) * win->size_line);
-	// win->ptr[i] = 255;
-	// i = ((x0 + y) * 4) + ((y0 + x) * win->size_line);	
-	// win->ptr[i] = 255;
-	// i = ((x0 - y) * 4) + ((y0 + x) * win->size_line);
-	// win->ptr[i] = 255;
-	// i = ((x0 - x) * 4) + ((y0 + y) * win->size_line);
-	// win->ptr[i] = 255;
-	// i = ((x0 - x) * 4) + ((x0 - x) * win->size_line);
-	// win->ptr[i] = 255;
-	// i = ((x0 - y) * 4) + ((y0 - x) * win->size_line);
-	// win->ptr[i] = 255;
-	// i = ((x0 + y) * 4) + ((y0 - x) * win->size_line);
-	// win->ptr[i] = 255;
-	// i = ((x0 + x) * 4) + ((y0 - y) * win->size_line);
-	// win->ptr[i] = 255;
 	put_circle(win, x0 + x, y0 + y, WHITE);
 	put_circle(win, x0 + y, y0 + x, WHITE);
 	put_circle(win, x0 - y, y0 + x, WHITE);
@@ -52,31 +35,27 @@ static void	draw_circle(t_win *win, int x0, int y0, int x, int y)
 
 void		get_circle(int x0, int y0, int radius, t_win *win)
 {
-	int x;
-	int y;
-	int dx;
-	int dy;
-	int err;
+	int buf[5];
 
-	x = radius - 1;
-	y = 0;
-	dx = 1;
-	dy = 1;
-	err = dx - (radius << 1);
-	while (x >= y)
+    buf[0] = radius - 1;
+    buf[1] = 0;
+    buf[2] = 1;
+    buf[3] = 1;
+    buf[4] = buf[2] - (radius << 1);
+	while (buf[0] >= buf[1])
 	{
-		draw_circle(win, x0, y0, x, y);
-		if (err <= 0)
+		draw_circle(win, x0, y0, buf[0], buf[1]);
+		if (buf[4] <= 0)
 		{
-			y++;
-			err += dy;
-			dy += 2;
+			buf[1]++;
+			buf[4] += buf[3];
+			buf[3] += 2;
 		}
-		if (err > 0)
+		if (buf[4] > 0)
 		{
-			x--;
-			dx += 2;
-			err += dx - (radius << 1);
+			buf[0]--;
+			buf[2] += 2;
+			buf[4] += buf[2] - (radius << 1);
 		}
 	}
 }
@@ -84,7 +63,8 @@ void		get_circle(int x0, int y0, int radius, t_win *win)
 static int	circle_moving(t_win *win)
 {
 	win->img_ptr = mlx_new_image(win->mlx_ptr, 400, 300);
-	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr, &win->bpp, &win->size_line, &win->endian);
+	win->ptr = (unsigned char*)mlx_get_data_addr(win->img_ptr,
+	&win->bpp, &win->size_line, &win->endian);
 	if (win->circle.x - win->circle.rad <= 0)
 		win->circle.vx *= -1;
 	if (win->circle.x + win->circle.rad >= 400)
@@ -93,9 +73,9 @@ static int	circle_moving(t_win *win)
 		win->circle.vy *= -1;
 	if (win->circle.y + win->circle.rad >= 300)
 		win->circle.vy *= -1;
-	win->circle.x += 0.7 * win->circle.vx;
-	win->circle.y += 0.7 * win->circle.vy;
-	get_circle(win->circle.x, win->circle.y, win->circle.rad, win);	
+	win->circle.x += 3 * win->circle.vx;
+	win->circle.y += 3 * win->circle.vy;
+	get_circle(win->circle.x, win->circle.y, win->circle.rad, win);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr_pasx, win->img_ptr, 0, 0);
 	mlx_destroy_image(win->mlx_ptr, win->img_ptr);
 	return (0);
