@@ -48,6 +48,7 @@ t_coord	*map_prepare(t_win *win, int x, int y, char *str)
 	coord->x = x * win->len;
 	coord->y = y * win->len;
 	coord->z = ft_atoi(str);
+	coord->color = get_color(coord, coord->z);
 	if (coord->z < win->lim_z[0])
 		win->lim_z[0] = coord->z;
 	if (coord->z > win->lim_z[1])
@@ -84,22 +85,4 @@ void	center_prepare(t_win *win)
 	y = (win->coord[0]->y + win->coord[win->lines * win->chars - 1]->y) / 2;
 	win->center.x = x;
 	win->center.y = y;
-}
-
-t_coord get_coord(t_win *win, int x, int y)
-{
-	return(*win->coord[(y * win->chars) + x]);
-}
-
-void print_coord(t_win *win, int j)
-{
-	if (j == 0)
-		j = win->lines * win->chars;
-	for(int i = 0; i < j; i++)
-	{
-		printf("x:%f\n", win->coord[i]->x);
-		printf("y:%f\n", win->coord[i]->y);
-		printf("z:%f\n\n\n", win->coord[i]->z);		
-	}
-	printf("-----------------\n");
 }

@@ -21,7 +21,7 @@ int		mouse_down(int button, int x, int y, t_win *win)
 			ft_scale(button, win);
 	else if (button == MOUSE_SCROLL_DOWN)
 			ft_scale(button, win);
-	else
+	else if (button == 1)
 		win->mouse.button_down = 1;
 	prepare_draw(win);
 	return (0);

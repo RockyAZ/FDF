@@ -45,7 +45,7 @@ void			ft_line_draw(t_win *win, t_coord cd1, t_coord cd2)
 	while ((state == 1) && !((int)cd1.x == (int)cd2.x && (int)cd1.y == (int)cd2.y))
 	{
 		if (cd1.x >= 0 && cd1.x <= WIDTH && cd1.y >= 0 && cd1.y <= HEIGHT)
-			draw_point(&cd1, win, 0x0D6386);
+			draw_point(&cd1, win, cd1.color);
 		cp_err = buff[4];
 		state = 0;
 		if (cp_err > -buff[0] && (int)cd1.x != (int)cd2.x)
