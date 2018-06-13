@@ -21,6 +21,7 @@
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define PINK 0xFF00FF
+
 /*
 ** main buttons
 */
@@ -31,7 +32,6 @@
 # define KEY_PLUS 69
 # define KEY_MINUS 78
 # define KEY_W 13
-# define KEY_S 1
 # define KEY_A 0
 # define KEY_D 2
 # define KEY_SHIFT 257
@@ -39,6 +39,7 @@
 # define KEY_TAB 48
 # define KEY_MULTI 67
 # define KEY_DIV 75
+
 /*
 ** addition buttons
 */
@@ -48,6 +49,7 @@
 # define KEY_B 11
 # define KEY_ENTER 36
 # define KEY_C 8
+
 /*
 ** mouse buttons
 */
@@ -55,10 +57,11 @@
 # define MOUSE_SCROLL_LEFT 7
 # define MOUSE_SCROLL_UP 5
 # define MOUSE_SCROLL_DOWN 4
+
 /*
 ** amount of something
 */
-# define MOVE_KEY 100
+# define MOVE_KEY 70
 # define MOVE_MOUSE 37
 
 # define MOVE_IN 1.1
@@ -149,7 +152,8 @@ void				ft_reboot(int key, t_win *win);
 void				ft_move(int key, t_win *win, int len);
 void				ft_scale(int key, t_win *win);
 void				ft_rotate(int key, t_win *win, double angle);
-void			    matrix_apply_caller(t_win *win, t_matrix *mx);
+void				ft_height(int key, t_win *win);
+void				matrix_apply_caller(t_win *win, t_matrix *mx);
 /*
 ** \/\/\/\/\/\/\/\/\/\/\/\/\/\
 */
@@ -175,10 +179,9 @@ void				center_prepare(t_win *win);
 void				matrix_prepare(t_win *win);
 void				prepare_draw(t_win *win);
 /*
-** to debuging
+** helper
 */
-void				print_coord(t_win *win, int j);
 void				pasx(int key, t_win *win);
 int					get_color(t_coord *coord, double z);
-
+void				str_out(t_win *win);
 #endif

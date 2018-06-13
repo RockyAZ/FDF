@@ -32,15 +32,31 @@ t_coord	get_coord(t_win *win, int x, int y)
 	return(*win->coord[(y * win->chars) + x]);
 }
 
-void	print_coord(t_win *win, int j)
+void	str_out(t_win *win)
 {
-	if (j == 0)
-		j = win->lines * win->chars;
-	for(int i = 0; i < j; i++)
-	{
-		printf("x:%f\n", win->coord[i]->x);
-		printf("y:%f\n", win->coord[i]->y);
-		printf("z:%f\n\n\n", win->coord[i]->z);		
-	}
-	printf("-----------------\n");
+	char *x;
+	char *y;
+
+	x = ft_itoa(win->coord[0]->x);
+	y = ft_itoa(win->coord[0]->y);
+	if (win->mouse.move_mod == 1)
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: MOVING");
+	else
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 0, PINK, "MODE: SCALING");
+	if (win->mouse.mouse_center == 1)
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK,
+		"CENTER: MOUSE POSITION");
+	else
+		mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 60, PINK,
+		"CENTER: CENTER MAP");	
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 75, BLUE,
+	"press [TAB] to change CENTER mod");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 15, BLUE,
+	"press [SHIFT] to change MAIN mod");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 30, RED, "X: ");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 30, GREEN, x);
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 0, 45, RED, "Y: ");
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 45, GREEN, y);
+	free(x);
+	free(y);
 }

@@ -28,12 +28,6 @@ void matrix_apply(t_win *win, t_coord *cd1, t_matrix *m)
 		cd1->x -= win->mouse.x;
 		cd1->y -= win->mouse.y;
 	}
-//	cp_x = cd1->x;
-//	cp_y = cd1->y;
-//	cp_z = cd1->z;
-//	cd1->x = m->a1 * cp_x + m->a2 * cp_y + m->a3 * cp_z + m->a4 * 1;
-//	cd1->y = m->b1 * cp_x + m->b2 * cp_y + m->b3 * cp_z + m->b4 * 1;
-//	cd1->z = m->c1 * cp_z + m->c2 * cp_z + m->c3 * cp_z + m->c4 * 1;
 	cp_x = m->a1 * cd1->x + m->a2 * cd1->y + m->a3 * cd1->z + m->a4 * 1;
 	cp_y = m->b1 * cd1->x + m->b2 * cd1->y + m->b3 * cd1->z + m->b4 * 1;
 	cp_z = m->c1 * cd1->x + m->c2 * cd1->y + m->c3 * cd1->z + m->c4 * 1;
@@ -89,8 +83,8 @@ int		what_key(int key, t_win *win)
 		ft_move(key, win, MOVE_KEY);
 	if (key == KEY_MINUS || key == KEY_PLUS)
 		ft_scale(key, win);
-	if ((key >=0 && key <= 2) || key == KEY_W)
-		ft_rotate(key, win, ANGLE_X);
+	if (key == KEY_A || key == KEY_W || key == KEY_D)
+	ft_rotate(key, win, ANGLE_X);
 	prepare_draw(win);
 	return (0);
 }

@@ -47,7 +47,7 @@ t_coord	*map_prepare(t_win *win, int x, int y, char *str)
 		error('m');
 	coord->x = x * win->len;
 	coord->y = y * win->len;
-	coord->z = ft_atoi(str);
+	coord->z = ft_atoi(str) * 8;
 	coord->color = get_color(coord, coord->z);
 	if (coord->z < win->lim_z[0])
 		win->lim_z[0] = coord->z;

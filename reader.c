@@ -68,7 +68,7 @@ int			reader(t_win *win)
 	i = 0;
 	win->coord = (t_coord**)malloc(sizeof(t_coord) * (win->lines * win->chars));
 	win->lim_z[0] = 0;
-	win->lim_z[1] = 0;	
+	win->lim_z[1] = 0;
 	while (get_next_line(win->fd, &line))
 	{
 		arr = ft_strsplit(line, ' ');

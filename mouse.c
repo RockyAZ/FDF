@@ -29,6 +29,7 @@ int		mouse_down(int button, int x, int y, t_win *win)
 
 int		mouse_up(int button, int x, int y, t_win *win)
 {
+	(void)button;
 	win->mouse.x = x;
 	win->mouse.y = y;
 	win->mouse.button_down = 0;
@@ -49,17 +50,16 @@ int		mouse_moving(int x, int y, t_win *win)
 		if (win->mouse.y < y)
 			ft_move(KEY_UP, win, win->mouse.y - y);
 	}
-
 	else if (win->mouse.button_down && win->mouse.move_mod == -1)
 	{
 		if (win->mouse.x > x)
-			ft_move(KEY_RIGHT, win, -(win->mouse.x - x));
+			ft_rotate(KEY_D, win, -(M_PI / 120));
 		if (win->mouse.x < x)
-			ft_move(KEY_LEFT, win, win->mouse.x - x);
+			ft_rotate(KEY_D, win, M_PI / 120);
 		if (win->mouse.y > y)
-			ft_move(KEY_DOWN, win, -(win->mouse.y - y));
+			ft_rotate(KEY_W, win, -(M_PI / 120));
 		if (win->mouse.y < y)
-			ft_move(KEY_UP, win, win->mouse.y - y);
+			ft_rotate(KEY_W, win, M_PI / 120);
 	}
 	win->mouse.x = x;
 	win->mouse.y = y;

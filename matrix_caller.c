@@ -56,3 +56,27 @@ void	ft_rotate(int key, t_win *win, double angle)
 		rotate_z_use(angle, &win->matrix);
 	matrix_apply_caller(win, &win->matrix);
 }
+
+// void	ft_height(int key, t_win *win)
+// {
+// 	int		x;
+// 	int		y;
+// 	t_coord	v;
+
+// 	y = 0;
+// 	while (y < win->lines)
+// 	{
+// 		x = 0;
+// 		while (x < win->chars)
+// 		{
+// 			v = get_coord(win, x, y);
+// 			if (key == KEY_MULTI)
+// 				v.z += 2;
+// 			else
+// 				v.z -= 2;
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	matrix_apply_caller(win, &win->matrix);	
+// }

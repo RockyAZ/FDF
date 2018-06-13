@@ -67,4 +67,66 @@
   y++;
   }
   }
+
+
+
+
+void	print_coord(t_win *win, int j)
+{
+	if (j == 0)
+		j = win->lines * win->chars;
+	for(int i = 0; i < j; i++)
+	{
+		printf("x:%f\n", win->coord[i]->x);
+		printf("y:%f\n", win->coord[i]->y);
+		printf("z:%f\n\n\n", win->coord[i]->z);		
+	}
+	printf("-----------------\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+void drawcircle(int x0, int y0, int radius, t_win *win)
+{
+    int x = radius-1;
+    int y = 0;
+    int dx = 1;
+    int dy = 1;
+    int err = dx - (radius << 1);
+
+    while (x >= y)
+    {
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + x, y0 + y, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + y, y0 + x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - y, y0 + x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - x, y0 + y, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - x, y0 - y, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 - y, y0 - x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + y, y0 - x, WHITE);
+		mlx_pixel_put(win->mlx_ptr, win->win_ptr, x0 + x, y0 - y, WHITE);
+        if (err <= 0)
+        {
+            y++;
+            err += dy;
+            dy += 2;
+        }
+        
+        if (err > 0)
+        {
+            x--;
+            dx += 2;
+            err += dx - (radius << 1);
+        }
+    }
+}
+
+
 */
